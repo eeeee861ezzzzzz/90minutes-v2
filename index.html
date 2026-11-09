@@ -32,6 +32,7 @@ header {
   align-items: center;
   gap: 14px;
   text-decoration: none;
+  max-width: 100%;
 }
 
 .logo-img {
@@ -39,6 +40,7 @@ header {
   height: 65px;
   object-fit: contain;
   border-radius: 10px;
+  flex-shrink: 0;
 }
 
 .logo-text {
@@ -82,6 +84,7 @@ nav .active {
 .hero h1 {
   font-size: clamp(36px, 6vw, 65px);
   margin: 0;
+  line-height: 1.15;
 }
 
 .hero h1 span {
@@ -121,6 +124,7 @@ main {
   overflow: hidden;
   box-shadow: 0 5px 20px rgba(0,0,0,0.06);
   transition: transform 0.2s;
+  min-width: 0;
 }
 
 .article:hover {
@@ -157,11 +161,13 @@ main {
 .article h3 {
   font-size: 21px;
   line-height: 1.4;
+  overflow-wrap: anywhere;
 }
 
 .article p {
   color: #59636e;
   line-height: 1.6;
+  overflow-wrap: anywhere;
 }
 
 .article a {
@@ -191,28 +197,143 @@ footer {
   text-align: center;
 }
 
-/* MOBILE */
+/* TABLETTES */
 
-@media (max-width: 600px) {
-  .hero {
-    padding: 65px 6%;
+@media (max-width: 800px) {
+  nav {
+    gap: 18px;
   }
 
-  .section-title {
-    font-size: 24px;
+  .hero {
+    padding: 60px 6%;
+  }
+
+  main {
+    margin: 35px auto;
+  }
+}
+
+/* TÉLÉPHONES */
+
+@media (max-width: 600px) {
+  header {
+    padding: 15px 5%;
   }
 
   .logo-img {
-    width: 48px;
-    height: 48px;
+    width: 46px;
+    height: 46px;
   }
 
   .logo-text {
     font-size: 22px;
+    letter-spacing: 0;
   }
 
   .logo-link {
     gap: 9px;
+  }
+
+  nav {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  nav a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 42px;
+    padding: 9px 6px;
+    font-size: 13px;
+    line-height: 1.35;
+    background: #172635;
+    border: 1px solid #304456;
+    border-radius: 7px;
+  }
+
+  nav .active {
+    border-color: #d8b46a;
+  }
+
+  .hero {
+    padding: 38px 6%;
+  }
+
+  .hero h1 {
+    font-size: clamp(29px, 8vw, 38px);
+    line-height: 1.2;
+  }
+
+  .hero p {
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 0;
+  }
+
+  .hero p br {
+    display: none;
+  }
+
+  main {
+    margin: 25px auto;
+    padding: 0 16px;
+  }
+
+  .section-title {
+    font-size: 21px;
+    line-height: 1.3;
+    margin: 32px 0 20px;
+    padding-left: 12px;
+  }
+
+  .articles {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  .article-image {
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+
+  .article-content {
+    padding: 20px;
+  }
+
+  .article h3 {
+    font-size: 20px;
+    margin: 12px 0;
+  }
+
+  .article p {
+    font-size: 15px;
+  }
+
+  footer {
+    margin-top: 45px;
+    padding: 28px 16px;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+}
+
+/* TRÈS PETITS ÉCRANS */
+
+@media (max-width: 360px) {
+  .logo-text {
+    font-size: 19px;
+  }
+
+  nav a {
+    font-size: 12px;
+  }
+
+  .hero h1 {
+    font-size: 28px;
   }
 }
 </style>
@@ -223,9 +344,7 @@ footer {
 <!-- LOGO ET NAVIGATION -->
 
 <header>
-
   <a class="logo-link" href="index.html">
-
     <img
       class="logo-img"
       src="Ic%C3%B4ne%20%C2%AB%2090%20%C2%BB%20avec%20ballon%20et%20swoosh%20dor%C3%A9.png"
@@ -235,7 +354,6 @@ footer {
     <span class="logo-text">
       90MINUTES<span>.</span>
     </span>
-
   </a>
 
   <nav>
@@ -244,13 +362,11 @@ footer {
     <a href="analyses.html">Résumés de matchs</a>
     <a href="championnats.html">Championnats</a>
   </nav>
-
 </header>
 
 <!-- BANNIÈRE -->
 
 <section class="hero">
-
   <h1>
     LE FOOTBALL <span>DÉCRYPTÉ.</span>
   </h1>
@@ -260,7 +376,6 @@ footer {
     <br>
     Une autre manière de comprendre le football.
   </p>
-
 </section>
 
 <!-- PUBLICATIONS -->
@@ -286,11 +401,9 @@ footer {
   <div class="articles">
 
     <article class="article">
-
       <div class="article-image">⚽</div>
 
       <div class="article-content">
-
         <span class="category">Actualités</span>
 
         <h3>Toute l'actualité du football</h3>
@@ -303,17 +416,13 @@ footer {
         <a href="actualites.html">
           Découvrir les actualités →
         </a>
-
       </div>
-
     </article>
 
     <article class="article">
-
       <div class="article-image">📋</div>
 
       <div class="article-content">
-
         <span class="category">Résumés de matchs</span>
 
         <h3>Revivez les matchs</h3>
@@ -326,17 +435,13 @@ footer {
         <a href="analyses.html">
           Découvrir les résumés →
         </a>
-
       </div>
-
     </article>
 
     <article class="article">
-
       <div class="article-image">🏆</div>
 
       <div class="article-content">
-
         <span class="category">Championnats</span>
 
         <h3>Retrouver les rédactions par compétition</h3>
@@ -349,9 +454,7 @@ footer {
         <a href="championnats.html">
           Découvrir les championnats →
         </a>
-
       </div>
-
     </article>
 
   </div>
@@ -365,7 +468,6 @@ footer {
 <!-- CHARGEMENT AUTOMATIQUE DES ARTICLES -->
 
 <script>
-
 const REPO = "eeeee861ezzzzzz/90minutes-v2";
 
 const API =
@@ -409,7 +511,6 @@ function imageURL(image) {
 }
 
 async function loadLatestArticles() {
-
   const status =
     document.getElementById("status");
 
@@ -417,7 +518,6 @@ async function loadLatestArticles() {
     document.getElementById("latest-articles");
 
   try {
-
     const response = await fetch(API);
 
     if (!response.ok) {
@@ -433,7 +533,6 @@ async function loadLatestArticles() {
 
     const articles = await Promise.all(
       markdownFiles.map(async file => {
-
         const articleResponse =
           await fetch(file.download_url);
 
@@ -452,7 +551,6 @@ async function loadLatestArticles() {
           image: getField(markdown, "image"),
           slug: file.name.replace(/\.md$/, "")
         };
-
       })
     );
 
@@ -480,15 +578,12 @@ async function loadLatestArticles() {
     status.textContent = "";
 
     if (latest.length === 0) {
-
       status.textContent =
         "Aucune nouvelle publication ces 7 derniers jours. Retrouvez toutes nos rédactions dans les championnats.";
-
       return;
     }
 
     latest.forEach(article => {
-
       const card =
         document.createElement("article");
 
@@ -511,13 +606,11 @@ async function loadLatestArticles() {
           : article.category;
 
       card.innerHTML = `
-
         <div class="article-image">
           ${imageHTML}
         </div>
 
         <div class="article-content">
-
           <span class="category">
             ${escapeHTML(displayedCategory)}
           </span>
@@ -539,28 +632,21 @@ async function loadLatestArticles() {
           <a href="${escapeHTML(link)}">
             Lire l'article →
           </a>
-
         </div>
-
       `;
 
       container.appendChild(card);
-
     });
 
   } catch (error) {
-
     console.error(error);
 
     status.textContent =
       "Impossible de charger les derniers articles pour le moment.";
-
   }
-
 }
 
 loadLatestArticles();
-
 </script>
 
 </body>
