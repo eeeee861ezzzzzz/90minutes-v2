@@ -4,75 +4,129 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Analyses tactiques | 90MINUTES</title>
+
 <style>
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   background: #f5f5f2;
   color: #101923;
   font-family: Arial, sans-serif;
 }
+
+/* EN-TÊTE */
+
 header {
   background: #101923;
   color: white;
-  padding: 25px 6%;
+  padding: 18px 6%;
   border-bottom: 4px solid #d8b46a;
 }
+
 .logo {
-  font-size: 32px;
-  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
 }
-.logo span { color: #d8b46a; }
+
+.logo img {
+  width: 65px;
+  height: 65px;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+.logo-text {
+  color: white;
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.logo-text span {
+  color: #d8b46a;
+}
+
 nav {
   display: flex;
   gap: 25px;
   flex-wrap: wrap;
   margin-top: 20px;
 }
+
 nav a {
   color: white;
   text-decoration: none;
   font-weight: bold;
 }
-nav a:hover, nav .active { color: #d8b46a; }
+
+nav a:hover,
+nav .active {
+  color: #d8b46a;
+}
+
+/* BANNIÈRE */
+
 .hero {
   background: #172635;
   color: white;
   padding: 75px 6%;
   text-align: center;
 }
+
 .hero h1 {
   font-size: clamp(35px, 6vw, 60px);
   margin: 0;
 }
-.hero span { color: #d8b46a; }
+
+.hero span {
+  color: #d8b46a;
+}
+
 .hero p {
   color: #c8cdd2;
   font-size: 18px;
   line-height: 1.7;
 }
+
+/* CONTENU */
+
 main {
   max-width: 1200px;
   margin: 50px auto;
   padding: 0 20px;
 }
+
 h2 {
   border-left: 5px solid #d8b46a;
   padding-left: 15px;
   margin-bottom: 25px;
 }
+
 .articles {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 25px;
 }
+
 .card {
   background: white;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+  transition: transform 0.2s;
 }
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
 .visual {
   background: #172635;
   height: 180px;
@@ -81,29 +135,44 @@ h2 {
   align-items: center;
   font-size: 50px;
 }
-.content { padding: 25px; }
+
+.content {
+  padding: 25px;
+}
+
 .category {
   color: #a17b35;
   font-size: 13px;
   font-weight: bold;
   text-transform: uppercase;
 }
+
 .card h3 {
   font-size: 22px;
   line-height: 1.4;
 }
+
 .card p {
   color: #59636e;
   line-height: 1.7;
 }
+
 .notice {
-  background: #fff;
+  background: white;
   border: 1px solid #e0e2e4;
   padding: 25px;
   border-radius: 12px;
   margin-top: 35px;
   text-align: center;
 }
+
+.notice p {
+  color: #59636e;
+  line-height: 1.6;
+}
+
+/* PIED DE PAGE */
+
 footer {
   background: #101923;
   color: #c8cdd2;
@@ -111,78 +180,149 @@ footer {
   padding: 35px 6%;
   margin-top: 70px;
 }
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+  .logo img {
+    width: 48px;
+    height: 48px;
+  }
+
+  .logo-text {
+    font-size: 22px;
+  }
+
+  .logo {
+    gap: 9px;
+  }
+
+  .hero {
+    padding: 60px 6%;
+  }
+
+  .articles {
+    grid-template-columns: 1fr;
+  }
+}
 </style>
 </head>
 
 <body>
 
+<!-- LOGO ET MENU -->
+
 <header>
-  <div class="logo">90MINUTES<span>.</span></div>
+
+  <a class="logo" href="index.html">
+
+    <img
+      src="Ic%C3%B4ne%20%C2%AB%2090%20%C2%BB%20avec%20ballon%20et%20swoosh%20dor%C3%A9.png"
+      alt="Logo 90MINUTES"
+    >
+
+    <span class="logo-text">
+      90MINUTES<span>.</span>
+    </span>
+
+  </a>
+
   <nav>
     <a href="index.html">Accueil</a>
     <a href="actualites.html">Actualités</a>
     <a href="analyses.html" class="active">Analyses tactiques</a>
-    <a href="index.html#decryptages">Décryptages</a>
   </nav>
+
 </header>
 
+<!-- BANNIÈRE -->
+
 <section class="hero">
-  <h1>LE FOOTBALL <span>SOUS UN AUTRE ANGLE.</span></h1>
+
+  <h1>
+    LE FOOTBALL <span>SOUS UN AUTRE ANGLE.</span>
+  </h1>
+
   <p>
     Systèmes de jeu, pressing, transitions et stratégies.
     <br>
     Comprendre ce qui se passe réellement sur le terrain.
   </p>
+
 </section>
 
+<!-- ANALYSES -->
+
 <main>
+
   <h2>NOS ANALYSES TACTIQUES</h2>
 
   <div class="articles">
+
     <article class="card">
+
       <div class="visual">📋</div>
+
       <div class="content">
         <span class="category">Systèmes de jeu</span>
+
         <h3>Comprendre les formations</h3>
+
         <p>
           Du 4-3-3 au 3-5-2, découvrez comment
           l'organisation des joueurs influence le jeu.
         </p>
       </div>
+
     </article>
 
     <article class="card">
+
       <div class="visual">⚽</div>
+
       <div class="content">
         <span class="category">Pressing</span>
+
         <h3>La bataille sans ballon</h3>
+
         <p>
           Pressing haut, bloc médian et récupération :
           les clés du travail défensif collectif.
         </p>
       </div>
+
     </article>
 
     <article class="card">
+
       <div class="visual">📊</div>
+
       <div class="content">
-        <span class="category">Décryptage de match</span>
+        <span class="category">Analyse de match</span>
+
         <h3>Au-delà du score</h3>
+
         <p>
           Comprendre les choix tactiques,
           les changements et les moments décisifs.
         </p>
       </div>
+
     </article>
+
   </div>
 
   <div class="notice">
+
     <h3>Les analyses 90MINUTES arrivent bientôt</h3>
+
     <p>
       Cette rubrique accueillera les analyses
       détaillées des matchs, rédigées par notre rédaction.
     </p>
+
   </div>
+
 </main>
 
 <footer>
