@@ -7,7 +7,9 @@
   <title>Article | 90MINUTES</title>
 
   <style>
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
       margin: 0;
@@ -39,43 +41,70 @@
     nav a {
       color: white;
       text-decoration: none;
+      font-weight: bold;
     }
 
-    nav a:hover { color: #d8b46a; }
+    nav a:hover {
+      color: #d8b46a;
+    }
 
     main {
-      max-width: 850px;
-      margin: 55px auto;
+      max-width: 920px;
+      margin: 48px auto;
       padding: 0 22px;
     }
 
     .back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       color: #d8b46a;
       text-decoration: none;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+
+    .back:hover {
+      text-decoration: underline;
+    }
+
+    .article-header {
+      border-bottom: 1px solid #304456;
+      padding-bottom: 30px;
+      margin-bottom: 30px;
     }
 
     .category {
       display: inline-block;
-      color: #d8b46a;
-      margin-top: 35px;
+      color: #101923;
+      background: #d8b46a;
+      padding: 9px 15px;
+      border-radius: 5px;
+      font-size: 13px;
       font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
     }
 
     h1 {
-      font-size: clamp(30px, 5vw, 48px);
+      font-size: clamp(32px, 5vw, 52px);
       line-height: 1.2;
-      margin-bottom: 20px;
+      margin: 22px 0;
+      letter-spacing: -0.5px;
     }
 
     .date {
       color: #aebdca;
-      margin-bottom: 30px;
+      font-size: 14px;
+      margin: 0;
     }
 
     .intro {
       color: #d0d9e2;
       font-size: 21px;
-      line-height: 1.7;
+      line-height: 1.75;
+      margin: 25px 0 30px;
+      font-weight: 400;
     }
 
     .cover {
@@ -84,42 +113,99 @@
       max-height: 480px;
       object-fit: cover;
       border-radius: 12px;
-      margin: 35px 0;
+      margin: 30px 0 42px;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.22);
     }
 
     .content {
+      max-width: 760px;
+      margin: 0 auto;
       font-size: 18px;
-      line-height: 1.9;
+      line-height: 1.95;
       overflow-wrap: anywhere;
+      color: #e5eaf0;
+    }
+
+    .content p {
+      margin: 0 0 25px;
     }
 
     .content h2,
     .content h3 {
       color: #d8b46a;
-      margin-top: 35px;
+      line-height: 1.35;
+      margin-top: 40px;
+      margin-bottom: 18px;
     }
 
-    .content a { color: #d8b46a; }
+    .content h2 {
+      font-size: 28px;
+    }
+
+    .content h3 {
+      font-size: 23px;
+    }
+
+    .content a {
+      color: #d8b46a;
+    }
 
     .content img {
       max-width: 100%;
+      height: auto;
       border-radius: 10px;
+      margin: 15px 0;
     }
 
     .content blockquote {
-      border-left: 3px solid #d8b46a;
-      padding-left: 18px;
+      border-left: 4px solid #d8b46a;
+      padding: 12px 20px;
+      margin: 30px 0;
+      background: #172635;
       color: #c8d2dc;
+      border-radius: 0 8px 8px 0;
     }
 
     .content pre {
       overflow-x: auto;
       background: #172635;
-      padding: 15px;
+      padding: 18px;
       border-radius: 8px;
     }
 
-    .status { color: #c8d2dc; }
+    .content ul,
+    .content ol {
+      padding-left: 25px;
+      margin-bottom: 25px;
+    }
+
+    .content li {
+      margin-bottom: 10px;
+    }
+
+    .article-bottom {
+      border-top: 1px solid #304456;
+      margin-top: 55px;
+      padding-top: 30px;
+    }
+
+    .bottom-link {
+      display: inline-block;
+      background: #d8b46a;
+      color: #101923;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 14px 22px;
+      border-radius: 7px;
+    }
+
+    .bottom-link:hover {
+      background: #f0cd85;
+    }
+
+    .status {
+      color: #c8d2dc;
+    }
 
     footer {
       text-align: center;
@@ -128,10 +214,55 @@
       border-top: 1px solid #304456;
       margin-top: 70px;
     }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 20px 6%;
+      }
+
+      .logo {
+        font-size: 24px;
+      }
+
+      nav {
+        gap: 14px;
+      }
+
+      nav a {
+        font-size: 14px;
+      }
+
+      main {
+        margin: 30px auto;
+        padding: 0 18px;
+      }
+
+      h1 {
+        font-size: 32px;
+      }
+
+      .intro {
+        font-size: 18px;
+      }
+
+      .content {
+        font-size: 17px;
+        line-height: 1.85;
+      }
+
+      .content h2 {
+        font-size: 24px;
+      }
+
+      .cover {
+        margin: 25px 0 35px;
+      }
+    }
   </style>
 </head>
 
 <body>
+
   <header>
     <a class="logo" href="index.html">90MINUTES</a>
 
@@ -144,18 +275,39 @@
   </header>
 
   <main>
-    <a class="back" href="actualites.html">← Retour aux actualités</a>
 
-    <p id="status" class="status">Chargement de l'article...</p>
+    <a id="back-link" class="back" href="actualites.html">
+      ← Retour aux actualités
+    </a>
+
+    <p id="status" class="status">
+      Chargement de l'article...
+    </p>
 
     <article id="article" hidden>
-      <span id="category" class="category"></span>
-      <h1 id="title"></h1>
-      <p id="date" class="date"></p>
+
+      <div class="article-header">
+        <span id="category" class="category"></span>
+
+        <h1 id="title"></h1>
+
+        <p id="date" class="date"></p>
+      </div>
+
       <p id="description" class="intro"></p>
+
       <img id="cover" class="cover" alt="" hidden>
+
       <div id="content" class="content"></div>
+
+      <div class="article-bottom">
+        <a id="bottom-link" class="bottom-link" href="actualites.html">
+          ← Retour aux actualités
+        </a>
+      </div>
+
     </article>
+
   </main>
 
   <footer>
@@ -189,6 +341,45 @@
       return value;
     }
 
+    function formatDate(date) {
+      if (!date) return "";
+
+      const parsed = new Date(date);
+
+      if (Number.isNaN(parsed.getTime())) {
+        return date.slice(0, 10);
+      }
+
+      return parsed.toLocaleDateString("fr-FR", {
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+      });
+    }
+
+    function updateBackLinks(category) {
+      const isSummary =
+        category === "Résumés de matchs" ||
+        category === "Analyses tactiques";
+
+      const href = isSummary
+        ? "analyses.html"
+        : "actualites.html";
+
+      const label = isSummary
+        ? "← Retour aux résumés de matchs"
+        : "← Retour aux actualités";
+
+      const backLink = document.getElementById("back-link");
+      const bottomLink = document.getElementById("bottom-link");
+
+      backLink.href = href;
+      backLink.textContent = label;
+
+      bottomLink.href = href;
+      bottomLink.textContent = label;
+    }
+
     async function loadArticle() {
       const status = document.getElementById("status");
       const params = new URLSearchParams(location.search);
@@ -210,6 +401,7 @@
         }
 
         const markdown = await response.text();
+
         const match = markdown.match(
           /^---\s*\r?\n([\s\S]*?)\r?\n---\s*\r?\n?([\s\S]*)$/
         );
@@ -224,9 +416,11 @@
         const title = field(frontmatter, "title");
         const category = field(frontmatter, "category");
         const date = field(frontmatter, "date");
+
         const description =
           field(frontmatter, "introduction") ||
           field(frontmatter, "description");
+
         const image = field(frontmatter, "image");
 
         document.title = (title || "Article") + " | 90MINUTES";
@@ -239,10 +433,12 @@
             : category;
 
         document.getElementById("date").textContent =
-          date.slice(0, 10);
+          "Publié le " + formatDate(date);
 
         document.getElementById("description").textContent =
           description;
+
+        updateBackLinks(category);
 
         const cover = document.getElementById("cover");
 
@@ -273,6 +469,7 @@
 
       } catch (error) {
         console.error(error);
+
         status.textContent =
           "Impossible de charger cet article pour le moment.";
       }
@@ -280,5 +477,6 @@
 
     loadArticle();
   </script>
+
 </body>
 </html>
