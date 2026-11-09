@@ -134,6 +134,13 @@ h2 {
   justify-content: center;
   align-items: center;
   font-size: 50px;
+  overflow: hidden;
+}
+
+.visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .content {
@@ -155,6 +162,30 @@ h2 {
 .card p {
   color: #59636e;
   line-height: 1.7;
+}
+
+.date {
+  font-size: 13px;
+}
+
+.read-more {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 12px 18px;
+  background: #d8b46a;
+  color: #101923;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 6px;
+}
+
+.read-more:hover {
+  background: #f0cd85;
+}
+
+.status {
+  color: #59636e;
+  margin: 25px 0;
 }
 
 .notice {
@@ -251,75 +282,61 @@ footer {
 
 </section>
 
-<!-- ANALYSES -->
-
 <main>
 
-  <h2>NOS ANALYSES TACTIQUES</h2>
+  <!-- ARTICLES PUBLIÉS -->
+
+  <h2>DERNIÈRES ANALYSES TACTIQUES</h2>
+
+  <p id="status" class="status">
+    Chargement des analyses...
+  </p>
+
+  <div id="published-analyses" class="articles"></div>
+
+  <!-- CARTES EXPLICATIVES -->
+
+  <h2 style="margin-top: 65px;">
+    COMPRENDRE LA TACTIQUE
+  </h2>
 
   <div class="articles">
 
     <article class="card">
-
       <div class="visual">📋</div>
-
       <div class="content">
         <span class="category">Systèmes de jeu</span>
-
         <h3>Comprendre les formations</h3>
-
         <p>
           Du 4-3-3 au 3-5-2, découvrez comment
           l'organisation des joueurs influence le jeu.
         </p>
       </div>
-
     </article>
 
     <article class="card">
-
       <div class="visual">⚽</div>
-
       <div class="content">
         <span class="category">Pressing</span>
-
         <h3>La bataille sans ballon</h3>
-
         <p>
           Pressing haut, bloc médian et récupération :
           les clés du travail défensif collectif.
         </p>
       </div>
-
     </article>
 
     <article class="card">
-
       <div class="visual">📊</div>
-
       <div class="content">
         <span class="category">Analyse de match</span>
-
         <h3>Au-delà du score</h3>
-
         <p>
           Comprendre les choix tactiques,
           les changements et les moments décisifs.
         </p>
       </div>
-
     </article>
-
-  </div>
-
-  <div class="notice">
-
-    <h3>Les analyses 90MINUTES arrivent bientôt</h3>
-
-    <p>
-      Cette rubrique accueillera les analyses
-      détaillées des matchs, rédigées par notre rédaction.
-    </p>
 
   </div>
 
@@ -328,6 +345,173 @@ footer {
 <footer>
   © 2026 90MINUTES — LE FOOTBALL DÉCRYPTÉ
 </footer>
+
+<!-- CHARGEMENT AUTOMATIQUE DES ANALYSES -->
+
+<script>
+
+const REPO = "eeeee861ezzzzzz/90minutes-v2";
+
+const API =
+  `https://api.github.com/repos/${REPO}/contents/publications`;
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[char]);
+}
+
+function getField(markdown, name) {
+  const match = markdown.match(
+    new RegExp("^" + name + ":\\s*(.*)$", "m")
+  );
+
+  if (!match) return "";
+
+  return match[1]
+    .trim()
+    .replace(/^["']|["']$/g, "");
+}
+
+function imageURL(image) {
+  if (!image) return "";
+
+  if (image.startsWith("https://")) {
+    return image;
+  }
+
+  if (image.startsWith("/")) {
+    return image;
+  }
+
+  return "/90minutes-v2/" +
+    image.replace(/^\/+/, "");
+}
+
+async function loadAnalyses() {
+
+  const status =
+    document.getElementById("status");
+
+  const container =
+    document.getElementById("published-analyses");
+
+  try {
+
+    const response = await fetch(API);
+
+    if (!response.ok) {
+      throw new Error("Publications indisponibles");
+    }
+
+    const files = await response.json();
+
+    const markdownFiles = files.filter(file =>
+      file.type === "file" &&
+      file.name.endsWith(".md")
+    );
+
+    const articles = await Promise.all(
+      markdownFiles.map(async file => {
+
+        const articleResponse =
+          await fetch(file.download_url);
+
+        if (!articleResponse.ok) {
+          throw new Error("Article inaccessible");
+        }
+
+        const markdown =
+          await articleResponse.text();
+
+        return {
+          title: getField(markdown, "title"),
+          category: getField(markdown, "category"),
+          date: getField(markdown, "date"),
+          description: getField(markdown, "description"),
+          image: getField(markdown, "image"),
+          slug: file.name.replace(/\.md$/, "")
+        };
+
+      })
+    );
+
+    const analyses = articles
+      .filter(article =>
+        article.category === "Analyses tactiques"
+      )
+      .sort((a, b) =>
+        new Date(b.date) - new Date(a.date)
+      );
+
+    status.textContent = "";
+
+    if (analyses.length === 0) {
+      status.textContent =
+        "Aucune analyse tactique publiée pour le moment.";
+      return;
+    }
+
+    analyses.forEach(article => {
+
+      const card = document.createElement("article");
+      card.className = "card";
+
+      const image = imageURL(article.image);
+
+      const imageHTML = image
+        ? `<img src="${escapeHTML(image)}"
+                alt="${escapeHTML(article.title)}">`
+        : "⚽";
+
+      const link =
+        "article.html?slug=" +
+        encodeURIComponent(article.slug);
+
+      card.innerHTML = `
+        <div class="visual">
+          ${imageHTML}
+        </div>
+
+        <div class="content">
+          <span class="category">
+            ${escapeHTML(article.category)}
+          </span>
+
+          <h3>${escapeHTML(article.title)}</h3>
+
+          <p>${escapeHTML(article.description)}</p>
+
+          <p class="date">
+            ${escapeHTML(article.date.slice(0, 10))}
+          </p>
+
+          <a class="read-more"
+             href="${escapeHTML(link)}">
+            Lire l'article
+          </a>
+        </div>
+      `;
+
+      container.appendChild(card);
+
+    });
+
+  } catch (error) {
+    console.error(error);
+    status.textContent =
+      "Impossible de charger les analyses pour le moment.";
+  }
+
+}
+
+loadAnalyses();
+
+</script>
 
 </body>
 </html>
