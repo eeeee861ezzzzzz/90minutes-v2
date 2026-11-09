@@ -89,7 +89,8 @@
 
     .articles {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns:
+        repeat(auto-fit, minmax(260px, 1fr));
       gap: 25px;
     }
 
@@ -131,6 +132,18 @@
       line-height: 1.6;
     }
 
+    .article a {
+      display: inline-block;
+      margin-top: 10px;
+      color: #a17b35;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .article a:hover {
+      text-decoration: underline;
+    }
+
     footer {
       margin-top: 70px;
       background: #101923;
@@ -144,11 +157,13 @@
 <body>
 
   <header>
-    <div class="logo">90MINUTES<span>.</span></div>
+    <div class="logo">
+      90MINUTES<span>.</span>
+    </div>
 
     <nav>
-      <a href="#accueil">Accueil</a>
-      <a href="#actualites">Actualités</a>
+      <a href="index.html">Accueil</a>
+      <a href="actualites.html">Actualités</a>
       <a href="#analyses">Analyses tactiques</a>
       <a href="#decryptages">Décryptages</a>
     </nav>
@@ -156,6 +171,7 @@
 
   <section class="hero" id="accueil">
     <h1>LE FOOTBALL <span>DÉCRYPTÉ.</span></h1>
+
     <p>
       Actualités, analyses tactiques et décryptages.
       <br>
@@ -165,7 +181,7 @@
 
   <main>
 
-    <h2 class="section-title" id="actualites">
+    <h2 class="section-title">
       À LA UNE
     </h2>
 
@@ -175,12 +191,18 @@
         <div class="article-image">⚽</div>
 
         <div class="article-content">
-          <span class="category">Analyse tactique</span>
+          <span class="category">Actualités</span>
+
           <h3>Bienvenue sur 90MINUTES</h3>
+
           <p>
-            Découvrez prochainement nos analyses,
-            actualités et décryptages du football.
+            Retrouvez les actualités du football,
+            les compétitions et les grands événements.
           </p>
+
+          <a href="actualites.html">
+            Découvrir les actualités →
+          </a>
         </div>
       </article>
 
@@ -188,11 +210,14 @@
         <div class="article-image">📋</div>
 
         <div class="article-content">
-          <span class="category">Tactique</span>
+          <span class="category">Analyse tactique</span>
+
           <h3>Comprendre le jeu autrement</h3>
+
           <p>
-            Systèmes de jeu, pressing, transitions
-            et stratégies des entraîneurs.
+            Découvrez les systèmes de jeu,
+            le pressing, les transitions et
+            les stratégies des entraîneurs.
           </p>
         </div>
       </article>
@@ -202,10 +227,13 @@
 
         <div class="article-content">
           <span class="category">Décryptage</span>
+
           <h3>Au-delà du résultat</h3>
+
           <p>
-            Des analyses pour comprendre ce qui
-            fait réellement la différence sur le terrain.
+            Des analyses pour comprendre
+            ce qui fait réellement la différence
+            sur le terrain.
           </p>
         </div>
       </article>
