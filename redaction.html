@@ -3,180 +3,46 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Espace rédaction | 90MINUTES</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rédaction | 90MINUTES</title>
 <style>
-* { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f5f5f2;
-  color: #101923;
-}
-
-header {
-  background: #101923;
-  color: white;
-  padding: 25px 6%;
-  border-bottom: 4px solid #d8b46a;
-}
-
-.logo {
-  font-size: 32px;
-  font-weight: 900;
-}
-
-.logo span { color: #d8b46a; }
-
-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 25px;
-  margin-top: 20px;
-}
-
-nav a {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-nav a:hover { color: #d8b46a; }
-
-.hero {
-  background: #172635;
-  color: white;
-  padding: 55px 6%;
-  text-align: center;
-}
-
-.hero h1 {
-  font-size: clamp(30px, 5vw, 48px);
-  margin: 0;
-}
-
-.hero span { color: #d8b46a; }
-
-.hero p {
-  color: #c8cdd2;
-  line-height: 1.6;
-}
-
-main {
-  max-width: 950px;
-  margin: 45px auto;
-  padding: 0 20px;
-}
-
-.panel, .preview {
-  background: white;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.06);
-}
-
-label {
-  display: block;
-  font-weight: bold;
-  margin: 22px 0 9px;
-}
-
-input, select, textarea {
-  width: 100%;
-  padding: 14px;
-  border: 1px solid #ccd1d6;
-  border-radius: 7px;
-  font: inherit;
-}
-
-textarea {
-  min-height: 280px;
-  resize: vertical;
-  line-height: 1.7;
-}
-
-button {
-  background: #101923;
-  color: white;
-  border: none;
-  padding: 14px 20px;
-  border-radius: 7px;
-  font-weight: bold;
-  cursor: pointer;
-  margin: 15px 10px 0 0;
-}
-
-button:hover { background: #243a50; }
-
-button.gold {
-  background: #d8b46a;
-  color: #101923;
-}
-
-.preview {
-  display: none;
-  margin-top: 30px;
-  overflow-wrap: anywhere;
-}
-
-.preview h2 { font-size: 32px; }
-
-.category {
-  color: #a17b35;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-.preview img {
-  width: 100%;
-  max-height: 420px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-top: 20px;
-}
-
-.article-body {
-  white-space: pre-wrap;
-  line-height: 1.8;
-  margin-top: 25px;
-}
-
-.info {
-  background: #f5f5f2;
-  border-left: 4px solid #d8b46a;
-  padding: 18px;
-  margin-top: 25px;
-  line-height: 1.7;
-}
-
-#publication {
-  display: none;
-  margin-top: 25px;
-}
-
-#codeArticle {
-  min-height: 180px;
-  font-family: monospace;
-  font-size: 13px;
-}
-
-#status {
-  color: #59636e;
-  line-height: 1.6;
-}
-
-footer {
-  background: #101923;
-  color: #c8cdd2;
-  text-align: center;
-  padding: 35px 6%;
-  margin-top: 65px;
-}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f5f5f2;color:#101923}
+header{background:#101923;color:white;padding:25px 6%;border-bottom:4px solid #d8b46a}
+.logo{font-size:32px;font-weight:900}
+.logo span{color:#d8b46a}
+nav{display:flex;gap:24px;flex-wrap:wrap;margin-top:20px}
+nav a{color:white;text-decoration:none;font-weight:bold}
+nav a:hover{color:#d8b46a}
+.hero{background:#172635;color:white;text-align:center;padding:55px 6%}
+.hero h1{font-size:clamp(30px,5vw,48px);margin:0}
+.hero h1 span{color:#d8b46a}
+.hero p{color:#c8cdd2;line-height:1.6}
+main{max-width:1050px;margin:40px auto;padding:0 20px}
+.panel{background:white;border-radius:12px;padding:28px;margin-bottom:25px;box-shadow:0 5px 20px #0000000d}
+h2{margin-top:0}
+label{display:block;font-weight:bold;margin:20px 0 8px}
+input,select,textarea{width:100%;font:inherit;padding:13px;border:1px solid #cbd1d6;border-radius:7px}
+textarea{min-height:240px;resize:vertical;line-height:1.7}
+button{background:#101923;color:white;border:0;border-radius:7px;padding:13px 18px;cursor:pointer;font-weight:bold;margin:8px 8px 8px 0}
+button:hover{background:#30465c}
+button.gold{background:#d8b46a;color:#101923}
+button.danger{background:#9c3838}
+.actions{display:flex;flex-wrap:wrap;margin-top:20px}
+.draft{border:1px solid #e1e4e8;padding:18px;border-radius:9px;margin:12px 0}
+.draft h3{margin:0 0 8px}
+.draft p{color:#59636e;margin:6px 0}
+.notice{background:#f5f5f2;border-left:4px solid #d8b46a;padding:16px;line-height:1.6}
+#preview,#publication{display:none}
+#previewTitle{font-size:30px}
+#previewBody{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.8}
+#previewImage{width:100%;max-height:400px;object-fit:cover;border-radius:9px}
+#jsonOutput{min-height:210px;font-family:monospace;font-size:13px}
+#status{color:#59636e;line-height:1.5}
+footer{text-align:center;background:#101923;color:#c8cdd2;padding:35px 6%;margin-top:65px}
+@media(max-width:600px){.panel{padding:20px}}
 </style>
 </head>
-
 <body>
 
 <header>
@@ -186,239 +52,325 @@ footer {
     <a href="actualites.html">Actualités</a>
     <a href="analyses.html">Analyses tactiques</a>
     <a href="decryptages.html">Décryptages</a>
+    <a href="articles.html">Articles</a>
   </nav>
 </header>
 
 <section class="hero">
   <h1>ESPACE <span>RÉDACTION.</span></h1>
-  <p>Rédige, prévisualise et prépare tes articles.</p>
+  <p>Crée tes articles, organise tes brouillons et prépare tes publications.</p>
 </section>
 
 <main>
 
 <section class="panel">
-
-  <h2>Nouvel article</h2>
+  <h2 id="formTitle">Nouvel article</h2>
 
   <label for="titre">Titre de l'article</label>
-  <input id="titre"
-    placeholder="Ex : PSG - Real Madrid : les clés du match">
+  <input id="titre" placeholder="Ex : PSG – Real Madrid : les clés du match">
 
   <label for="categorie">Rubrique</label>
   <select id="categorie">
-    <option value="Actualités">Actualités</option>
-    <option value="Analyses tactiques">Analyses tactiques</option>
-    <option value="Décryptages">Décryptages</option>
+    <option>Actualités</option>
+    <option>Analyses tactiques</option>
+    <option>Décryptages</option>
   </select>
 
-  <label for="image">Image de couverture</label>
+  <label for="image">Image de couverture (prévisualisation uniquement)</label>
   <input id="image" type="file" accept="image/*">
 
   <label for="introduction">Introduction</label>
-  <textarea id="introduction"
-    style="min-height:110px"
-    placeholder="Présente ton sujet..."></textarea>
+  <textarea id="introduction" style="min-height:110px"
+    placeholder="Présente le sujet de ton article..."></textarea>
 
   <label for="contenu">Contenu de l'article</label>
-  <textarea id="contenu"
-    placeholder="Écris ton article ici..."></textarea>
+  <textarea id="contenu" placeholder="Rédige ton article..."></textarea>
 
-  <button type="button" onclick="sauvegarder()">
-    Enregistrer le brouillon
-  </button>
-
-  <button type="button" onclick="previsualiser()">
-    Prévisualiser
-  </button>
-
-  <button type="button" class="gold"
-    onclick="preparerPublication()">
-    Préparer la publication
-  </button>
+  <div class="actions">
+    <button onclick="saveDraft()">Enregistrer le brouillon</button>
+    <button onclick="showPreview()">Prévisualiser</button>
+    <button class="gold" onclick="preparePublication()">Préparer la publication</button>
+    <button onclick="newArticle()">Nouvel article</button>
+  </div>
 
   <p id="status" role="status"></p>
 
-  <div class="info">
-    <strong>Important :</strong>
-    cette page est publique. Les brouillons restent
-    uniquement dans ce navigateur.
-    Le bouton de préparation ne publie pas encore
-    l'article. Seul un compte ayant accès au dépôt
-    GitHub pourra modifier les articles publiés.
-    L'image sélectionnée sert à la prévisualisation :
-    elle n'est pas encore envoyée sur le site.
+  <div class="notice">
+    Les brouillons sont enregistrés uniquement sur cet appareil et
+    dans ce navigateur. Ils ne sont pas synchronisés et peuvent être
+    perdus si les données du navigateur sont effacées.
+    Cette page est publique : elle ne constitue pas un espace privé.
   </div>
-
-  <div id="publication">
-    <h3>Article prêt pour GitHub</h3>
-
-    <p>
-      Copie ce bloc pour l'ajouter dans
-      <strong>articles.json</strong>.
-    </p>
-
-    <textarea id="codeArticle" readonly></textarea>
-
-    <button type="button" onclick="copierArticle()">
-      Copier l'article
-    </button>
-
-    <p>
-      <a href="https://github.com/eeeee861ezzzzzz/90minutes-v2/blob/main/articles.json"
-         target="_blank" rel="noopener noreferrer">
-        Ouvrir articles.json sur GitHub
-      </a>
-    </p>
-  </div>
-
 </section>
 
-<section class="preview" id="preview">
-  <span class="category" id="pCategorie"></span>
-  <h2 id="pTitre"></h2>
-  <p id="pIntroduction"></p>
-  <img id="pImage" alt="Couverture" hidden>
-  <div class="article-body" id="pContenu"></div>
+<section class="panel">
+  <h2>Mes brouillons</h2>
+  <div id="draftList"></div>
+</section>
+
+<section class="panel" id="preview">
+  <h2>Prévisualisation</h2>
+  <p id="previewCategory"></p>
+  <h3 id="previewTitle"></h3>
+  <p id="previewIntro"></p>
+  <img id="previewImage" hidden alt="Image de couverture">
+  <div id="previewBody"></div>
+</section>
+
+<section class="panel" id="publication">
+  <h2>Préparer la publication</h2>
+  <p>Voici les données de ton article pour GitHub :</p>
+  <textarea id="jsonOutput" readonly></textarea>
+  <button onclick="copyJSON()">Copier l'article</button>
+  <p>
+    <a href="https://github.com/eeeee861ezzzzzz/90minutes-v2/blob/main/articles.json"
+       target="_blank" rel="noopener noreferrer">
+      Ouvrir articles.json sur GitHub
+    </a>
+  </p>
+  <div class="notice">
+    Ce bloc représente un seul article. Pour le publier,
+    ajoute-le dans le tableau "articles" du fichier articles.json,
+    en séparant les articles par des virgules.
+    Ne remplace pas tout le fichier par ce seul bloc.
+    L'image locale n'est pas incluse.
+  </div>
 </section>
 
 </main>
 
-<footer>
-  © 2026 90MINUTES — LE FOOTBALL DÉCRYPTÉ
-</footer>
+<footer>© 2026 90MINUTES — LE FOOTBALL DÉCRYPTÉ</footer>
 
 <script>
-const champs = [
-  "titre",
-  "categorie",
-  "introduction",
-  "contenu"
-];
+const STORAGE_KEY = "90minutes_drafts_v2";
+const OLD_KEY = "90minutes_brouillon";
+let currentId = null;
+let previewURL = null;
 
-function donnees() {
-  const article = {};
-
-  champs.forEach(id => {
-    article[id] = document.getElementById(id).value;
-  });
-
-  return article;
+function el(id) {
+  return document.getElementById(id);
 }
 
-function message(texte) {
-  document.getElementById("status").textContent = texte;
-}
-
-function sauvegarder() {
+function getDrafts() {
   try {
-    localStorage.setItem(
-      "90minutes_brouillon",
-      JSON.stringify(donnees())
-    );
-
-    message("Brouillon enregistré sur cet appareil.");
-  } catch (erreur) {
-    message("Impossible d'enregistrer le brouillon.");
+    const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+    return Array.isArray(data) ? data : [];
+  } catch {
+    return [];
   }
 }
 
-function previsualiser() {
-  const article = donnees();
-
-  document.getElementById("pTitre").textContent =
-    article.titre || "Article sans titre";
-
-  document.getElementById("pCategorie").textContent =
-    article.categorie;
-
-  document.getElementById("pIntroduction").textContent =
-    article.introduction;
-
-  document.getElementById("pContenu").textContent =
-    article.contenu;
-
-  const fichier = document.getElementById("image").files[0];
-  const image = document.getElementById("pImage");
-
-  if (image.dataset.url) {
-    URL.revokeObjectURL(image.dataset.url);
-    delete image.dataset.url;
-  }
-
-  if (fichier) {
-    const url = URL.createObjectURL(fichier);
-    image.src = url;
-    image.dataset.url = url;
-    image.hidden = false;
-  } else {
-    image.removeAttribute("src");
-    image.hidden = true;
-  }
-
-  document.getElementById("preview").style.display = "block";
-  document.getElementById("preview").scrollIntoView({
-    behavior: "smooth"
-  });
+function getArticle() {
+  return {
+    titre: el("titre").value.trim(),
+    categorie: el("categorie").value,
+    introduction: el("introduction").value.trim(),
+    contenu: el("contenu").value.trim()
+  };
 }
 
-function preparerPublication() {
-  const article = donnees();
+function setStatus(text) {
+  el("status").textContent = text;
+}
 
-  if (!article.titre.trim() ||
-      !article.contenu.trim()) {
-    message("Ajoute un titre et du contenu.");
+function saveDrafts(drafts) {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(drafts));
+    return true;
+  } catch {
+    setStatus("Impossible d'enregistrer les brouillons.");
+    return false;
+  }
+}
+
+function saveDraft() {
+  const article = getArticle();
+
+  if (!article.titre) {
+    setStatus("Ajoute un titre avant d'enregistrer.");
     return;
   }
 
-  const publication = {
-    titre: article.titre,
-    categorie: article.categorie,
-    introduction: article.introduction,
-    contenu: article.contenu
+  const drafts = getDrafts();
+
+  if (!currentId) {
+    currentId = crypto.randomUUID();
+  }
+
+  const draft = {
+    id: currentId,
+    ...article,
+    updatedAt: new Date().toISOString()
   };
 
-  document.getElementById("codeArticle").value =
-    JSON.stringify(publication, null, 2);
+  const index = drafts.findIndex(d => d.id === currentId);
 
-  document.getElementById("publication").style.display =
-    "block";
+  if (index >= 0) {
+    drafts[index] = draft;
+  } else {
+    drafts.unshift(draft);
+  }
 
-  message("Article préparé. Il n'est pas encore publié.");
+  if (saveDrafts(drafts)) {
+    setStatus("Brouillon enregistré !");
+    el("formTitle").textContent = "Modifier l'article";
+    renderDrafts();
+  }
+}
 
-  document.getElementById("publication").scrollIntoView({
-    behavior: "smooth"
+function renderDrafts() {
+  const list = el("draftList");
+  list.replaceChildren();
+
+  const drafts = getDrafts();
+
+  if (!drafts.length) {
+    list.textContent = "Aucun brouillon enregistré.";
+    return;
+  }
+
+  drafts.forEach(draft => {
+    const box = document.createElement("div");
+    box.className = "draft";
+
+    const title = document.createElement("h3");
+    title.textContent = draft.titre;
+
+    const category = document.createElement("p");
+    category.textContent = draft.categorie;
+
+    const edit = document.createElement("button");
+    edit.textContent = "Modifier";
+    edit.onclick = () => editDraft(draft.id);
+
+    const remove = document.createElement("button");
+    remove.textContent = "Supprimer";
+    remove.className = "danger";
+    remove.onclick = () => deleteDraft(draft.id);
+
+    box.append(title, category, edit, remove);
+    list.appendChild(box);
   });
 }
 
-async function copierArticle() {
-  const texte = document.getElementById("codeArticle").value;
+function editDraft(id) {
+  const draft = getDrafts().find(d => d.id === id);
+  if (!draft) return;
+
+  currentId = id;
+  ["titre", "categorie", "introduction", "contenu"].forEach(key => {
+    el(key).value = draft[key] || "";
+  });
+
+  el("image").value = "";
+  el("formTitle").textContent = "Modifier l'article";
+  el("preview").style.display = "none";
+  el("publication").style.display = "none";
+  setStatus("Brouillon chargé.");
+  window.scrollTo({top: 0, behavior: "smooth"});
+}
+
+function deleteDraft(id) {
+  if (!confirm("Supprimer ce brouillon ?")) return;
+
+  const drafts = getDrafts().filter(d => d.id !== id);
+  if (!saveDrafts(drafts)) return;
+
+  if (currentId === id) newArticle();
+  renderDrafts();
+  setStatus("Brouillon supprimé.");
+}
+
+function newArticle() {
+  currentId = null;
+  ["titre", "introduction", "contenu"].forEach(key => {
+    el(key).value = "";
+  });
+  el("categorie").selectedIndex = 0;
+  el("image").value = "";
+  el("formTitle").textContent = "Nouvel article";
+  el("preview").style.display = "none";
+  el("publication").style.display = "none";
+  setStatus("Nouvel article prêt.");
+}
+
+function showPreview() {
+  const article = getArticle();
+
+  el("previewTitle").textContent = article.titre || "Sans titre";
+  el("previewCategory").textContent = article.categorie;
+  el("previewIntro").textContent = article.introduction;
+  el("previewBody").textContent = article.contenu;
+
+  if (previewURL) {
+    URL.revokeObjectURL(previewURL);
+    previewURL = null;
+  }
+
+  const file = el("image").files[0];
+  const img = el("previewImage");
+
+  if (file) {
+    previewURL = URL.createObjectURL(file);
+    img.src = previewURL;
+    img.hidden = false;
+  } else {
+    img.removeAttribute("src");
+    img.hidden = true;
+  }
+
+  el("preview").style.display = "block";
+  el("preview").scrollIntoView({behavior: "smooth"});
+}
+
+function preparePublication() {
+  const article = getArticle();
+
+  if (!article.titre || !article.contenu) {
+    setStatus("Ajoute un titre et du contenu.");
+    return;
+  }
+
+  el("jsonOutput").value = JSON.stringify(article, null, 2);
+  el("publication").style.display = "block";
+  el("publication").scrollIntoView({behavior: "smooth"});
+  setStatus("Article préparé, pas encore publié.");
+}
+
+async function copyJSON() {
+  const text = el("jsonOutput").value;
 
   try {
-    await navigator.clipboard.writeText(texte);
-    message("Article copié !");
-  } catch (erreur) {
-    const zone = document.getElementById("codeArticle");
-    zone.focus();
-    zone.select();
-    message("Sélectionne le texte puis appuie sur Ctrl+C.");
+    await navigator.clipboard.writeText(text);
+    setStatus("Article copié !");
+  } catch {
+    el("jsonOutput").select();
+    setStatus("Appuie sur Ctrl+C pour copier.");
   }
 }
 
-try {
-  const brouillon = JSON.parse(
-    localStorage.getItem("90minutes_brouillon")
-  );
+// Récupère l'ancien brouillon de la première version,
+// sans écraser les brouillons existants.
+function migrateOldDraft() {
+  if (getDrafts().length) return;
 
-  if (brouillon) {
-    champs.forEach(id => {
-      if (typeof brouillon[id] === "string") {
-        document.getElementById(id).value = brouillon[id];
-      }
-    });
-  }
-} catch (erreur) {
-  message("Impossible de récupérer le brouillon.");
+  try {
+    const old = JSON.parse(localStorage.getItem(OLD_KEY));
+    if (!old || !old.titre) return;
+
+    saveDrafts([{
+      id: crypto.randomUUID(),
+      titre: old.titre,
+      categorie: old.categorie || "Actualités",
+      introduction: old.introduction || "",
+      contenu: old.contenu || "",
+      updatedAt: new Date().toISOString()
+    }]);
+  } catch {}
 }
+
+migrateOldDraft();
+renderDrafts();
 </script>
 
 </body>
