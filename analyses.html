@@ -188,20 +188,6 @@ h2 {
   margin: 25px 0;
 }
 
-.notice {
-  background: white;
-  border: 1px solid #e0e2e4;
-  padding: 25px;
-  border-radius: 12px;
-  margin-top: 35px;
-  text-align: center;
-}
-
-.notice p {
-  color: #59636e;
-  line-height: 1.6;
-}
-
 /* PIED DE PAGE */
 
 footer {
@@ -262,6 +248,7 @@ footer {
     <a href="index.html">Accueil</a>
     <a href="actualites.html">Actualités</a>
     <a href="analyses.html" class="active">Analyses tactiques</a>
+    <a href="championnats.html">Championnats</a>
   </nav>
 
 </header>
@@ -284,7 +271,7 @@ footer {
 
 <main>
 
-  <!-- ARTICLES PUBLIÉS -->
+  <!-- ANALYSES RÉCENTES -->
 
   <h2>DERNIÈRES ANALYSES TACTIQUES</h2>
 
@@ -440,10 +427,26 @@ async function loadAnalyses() {
       })
     );
 
+    /* UNIQUEMENT LES ANALYSES DES 7 DERNIERS JOURS */
+
+    const now = new Date();
+    const sevenDays = 7 * 24 * 60 * 60 * 1000;
+
     const analyses = articles
-      .filter(article =>
-        article.category === "Analyses tactiques"
-      )
+      .filter(article => {
+        if (article.category !== "Analyses tactiques") {
+          return false;
+        }
+
+        const published = new Date(article.date);
+        const age = now - published;
+
+        return (
+          !Number.isNaN(published.getTime()) &&
+          age >= 0 &&
+          age <= sevenDays
+        );
+      })
       .sort((a, b) =>
         new Date(b.date) - new Date(a.date)
       );
@@ -452,7 +455,7 @@ async function loadAnalyses() {
 
     if (analyses.length === 0) {
       status.textContent =
-        "Aucune analyse tactique publiée pour le moment.";
+        "Aucune nouvelle analyse ces 7 derniers jours. Retrouvez les anciennes analyses dans les championnats.";
       return;
     }
 
