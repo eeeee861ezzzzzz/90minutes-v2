@@ -19,6 +19,8 @@ body {
   font-family: Arial, sans-serif;
 }
 
+/* EN-TÊTE */
+
 header {
   background: #101923;
   color: white;
@@ -31,6 +33,7 @@ header {
   align-items: center;
   gap: 14px;
   text-decoration: none;
+  max-width: 100%;
 }
 
 .logo img {
@@ -38,6 +41,7 @@ header {
   height: 65px;
   object-fit: contain;
   border-radius: 10px;
+  flex-shrink: 0;
 }
 
 .logo-text {
@@ -68,6 +72,8 @@ nav a.active {
   color: #d8b46a;
 }
 
+/* BANNIÈRE */
+
 .hero {
   background: #172635;
   padding: 70px 6%;
@@ -77,6 +83,7 @@ nav a.active {
 
 .hero h1 {
   font-size: clamp(35px, 6vw, 60px);
+  line-height: 1.2;
   margin: 0;
 }
 
@@ -90,6 +97,8 @@ nav a.active {
   line-height: 1.7;
 }
 
+/* CONTENU */
+
 main {
   max-width: 1200px;
   margin: 45px auto;
@@ -99,11 +108,14 @@ main {
 h2 {
   border-left: 5px solid #d8b46a;
   padding-left: 15px;
+  line-height: 1.3;
 }
+
+/* CHAMPIONNATS */
 
 .leagues {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 22px;
   margin-top: 30px;
 }
@@ -120,6 +132,7 @@ h2 {
   transition: 0.2s;
   color: #101923;
   font: inherit;
+  min-width: 0;
 }
 
 .league:hover,
@@ -128,9 +141,15 @@ h2 {
   transform: translateY(-3px);
 }
 
+.league:focus-visible {
+  outline: 3px solid #d8b46a;
+  outline-offset: 3px;
+}
+
 .league img {
   width: 110px;
   height: 105px;
+  max-width: 100%;
   object-fit: contain;
   margin-bottom: 12px;
 }
@@ -138,23 +157,36 @@ h2 {
 .league strong {
   display: block;
   font-size: 17px;
+  overflow-wrap: anywhere;
 }
+
+/* RÉSULTATS */
 
 .results {
   margin-top: 55px;
 }
 
+.results[hidden] {
+  display: none;
+}
+
 .articles {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(260px, 1fr)
+  );
   gap: 25px;
   margin-top: 25px;
 }
+
+/* CARTES DES ARTICLES */
 
 .card {
   background: white;
   border-radius: 12px;
   overflow: hidden;
+  min-width: 0;
   box-shadow: 0 5px 20px rgba(0,0,0,0.06);
 }
 
@@ -166,6 +198,7 @@ h2 {
   align-items: center;
   justify-content: center;
   font-size: 48px;
+  overflow: hidden;
 }
 
 .visual img {
@@ -187,11 +220,13 @@ h2 {
 
 .content h3 {
   line-height: 1.4;
+  overflow-wrap: anywhere;
 }
 
 .content p {
   color: #59636e;
   line-height: 1.7;
+  overflow-wrap: anywhere;
 }
 
 .read-more {
@@ -202,6 +237,10 @@ h2 {
   text-decoration: none;
   font-weight: bold;
   border-radius: 6px;
+}
+
+.read-more:hover {
+  background: #f0cd85;
 }
 
 .status {
@@ -218,6 +257,12 @@ h2 {
   flex-wrap: wrap;
   gap: 15px;
   margin-top: 35px;
+}
+
+/* CORRECTION DU MASQUAGE */
+
+.pagination[hidden] {
+  display: none;
 }
 
 .pagination button {
@@ -246,6 +291,8 @@ h2 {
   color: #101923;
 }
 
+/* PIED DE PAGE */
+
 footer {
   background: #101923;
   color: #c8cdd2;
@@ -254,37 +301,228 @@ footer {
   margin-top: 70px;
 }
 
-@media(max-width:700px) {
+/* TABLETTES */
+
+@media (max-width: 800px) {
   .leagues {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
   }
 
   .league {
-    min-height: 155px;
-    padding: 18px 10px;
+    min-height: 170px;
+    padding: 20px 12px;
   }
 
   .league img {
-    width: 80px;
-    height: 80px;
+    width: 90px;
+    height: 85px;
+  }
+}
+
+/* TÉLÉPHONES */
+
+@media (max-width: 600px) {
+
+  /* EN-TÊTE */
+
+  header {
+    padding: 15px 5%;
+  }
+
+  .logo {
+    gap: 9px;
   }
 
   .logo img {
-    width: 48px;
-    height: 48px;
+    width: 46px;
+    height: 46px;
   }
 
   .logo-text {
     font-size: 22px;
   }
 
+  /* MENU SUR DEUX COLONNES */
+
+  nav {
+    display: grid;
+    grid-template-columns: repeat(
+      2,
+      minmax(0, 1fr)
+    );
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  nav a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 9px 6px;
+    text-align: center;
+    font-size: 13px;
+    line-height: 1.35;
+    background: #172635;
+    border: 1px solid #304456;
+    border-radius: 7px;
+  }
+
+  nav a.active {
+    border-color: #d8b46a;
+  }
+
+  /* BANNIÈRE */
+
   .hero {
-    padding: 55px 6%;
+    padding: 28px 6%;
+  }
+
+  .hero h1 {
+    font-size: clamp(30px, 8vw, 38px);
+  }
+
+  .hero p {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* CONTENU */
+
+  main {
+    margin: 25px auto;
+    padding: 0 16px;
+  }
+
+  h2 {
+    font-size: 21px;
+    padding-left: 12px;
+  }
+
+  /* CHAMPIONNATS */
+
+  .leagues {
+    grid-template-columns: repeat(
+      2,
+      minmax(0, 1fr)
+    );
+    gap: 12px;
+    margin-top: 22px;
+  }
+
+  .league {
+    min-height: 150px;
+    padding: 16px 8px;
+    border-radius: 10px;
+  }
+
+  .league img {
+    width: 75px;
+    height: 75px;
+    margin-bottom: 9px;
+  }
+
+  .league strong {
+    font-size: 14px;
+    line-height: 1.3;
+  }
+
+  /* ARTICLES */
+
+  .results {
+    margin-top: 40px;
+  }
+
+  .articles {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+    margin-top: 20px;
+  }
+
+  .visual {
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+
+  .visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .content {
+    padding: 20px;
+  }
+
+  .content h3 {
+    font-size: 20px;
+  }
+
+  .content p {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .read-more {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+
+  /* PAGINATION MOBILE */
+
+  .pagination {
+    gap: 10px;
+    margin-top: 25px;
   }
 
   .pagination button {
+    min-height: 44px;
     padding: 10px 14px;
+    font-size: 13px;
+  }
+
+  .page-info {
+    font-size: 13px;
+    text-align: center;
+  }
+
+  /* PIED DE PAGE */
+
+  footer {
+    margin-top: 45px;
+    padding: 28px 16px;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+}
+
+/* TRÈS PETITS ÉCRANS */
+
+@media (max-width: 360px) {
+  .logo-text {
+    font-size: 19px;
+  }
+
+  nav a {
+    font-size: 12px;
+  }
+
+  .league strong {
+    font-size: 13px;
+  }
+
+  .pagination {
+    gap: 8px;
+  }
+
+  .pagination button {
+    padding: 9px 10px;
+    font-size: 12px;
   }
 }
 </style>
@@ -292,12 +530,15 @@ footer {
 
 <body>
 
+<!-- LOGO ET MENU -->
+
 <header>
   <a class="logo" href="index.html">
     <img
       src="Ic%C3%B4ne%20%C2%AB%2090%20%C2%BB%20avec%20ballon%20et%20swoosh%20dor%C3%A9.png"
       alt="Logo 90MINUTES"
     >
+
     <span class="logo-text">
       90MINUTES<span>.</span>
     </span>
@@ -307,12 +548,17 @@ footer {
     <a href="index.html">Accueil</a>
     <a href="actualites.html">Actualités</a>
     <a href="analyses.html">Résumés de matchs</a>
-    <a href="championnats.html" class="active">Championnats</a>
+    <a href="championnats.html" class="active">
+      Championnats
+    </a>
   </nav>
 </header>
 
+<!-- BANNIÈRE -->
+
 <section class="hero">
   <h1>NOS <span>CHAMPIONNATS.</span></h1>
+
   <p>
     Choisissez une compétition et retrouvez
     toutes les rédactions de 90MINUTES.
@@ -323,46 +569,74 @@ footer {
 
   <h2>CHOISIR UNE COMPÉTITION</h2>
 
+  <!-- SIX CHAMPIONNATS -->
+
   <div class="leagues">
 
-    <button class="league" data-league="liga">
-      <img src="https://media.api-sports.io/football/leagues/140.png" alt="LaLiga">
+    <button class="league" data-league="liga" type="button">
+      <img
+        src="https://media.api-sports.io/football/leagues/140.png"
+        alt="LaLiga"
+      >
       <strong>LaLiga</strong>
     </button>
 
-    <button class="league" data-league="premier-league">
-      <img src="https://media.api-sports.io/football/leagues/39.png" alt="Premier League">
+    <button class="league" data-league="premier-league" type="button">
+      <img
+        src="https://media.api-sports.io/football/leagues/39.png"
+        alt="Premier League"
+      >
       <strong>Premier League</strong>
     </button>
 
-    <button class="league" data-league="ligue-1">
-      <img src="https://media.api-sports.io/football/leagues/61.png" alt="Ligue 1">
+    <button class="league" data-league="ligue-1" type="button">
+      <img
+        src="https://media.api-sports.io/football/leagues/61.png"
+        alt="Ligue 1"
+      >
       <strong>Ligue 1</strong>
     </button>
 
-    <button class="league" data-league="serie-a">
-      <img src="https://media.api-sports.io/football/leagues/135.png" alt="Serie A">
+    <button class="league" data-league="serie-a" type="button">
+      <img
+        src="https://media.api-sports.io/football/leagues/135.png"
+        alt="Serie A"
+      >
       <strong>Serie A</strong>
     </button>
 
-    <button class="league" data-league="bundesliga">
-      <img src="https://media.api-sports.io/football/leagues/78.png" alt="Bundesliga">
+    <button class="league" data-league="bundesliga" type="button">
+      <img
+        src="https://media.api-sports.io/football/leagues/78.png"
+        alt="Bundesliga"
+      >
       <strong>Bundesliga</strong>
     </button>
 
-    <button class="league" data-league="champions-league">
-      <img src="https://media.api-sports.io/football/leagues/2.png" alt="Ligue des champions">
+    <button class="league" data-league="champions-league" type="button">
+      <img
+        src="https://media.api-sports.io/football/leagues/2.png"
+        alt="Ligue des champions"
+      >
       <strong>Ligue des champions</strong>
     </button>
 
   </div>
 
+  <!-- ARTICLES DU CHAMPIONNAT -->
+
   <section class="results" id="results" hidden>
+
     <h2 id="results-title"></h2>
+
     <p class="status" id="status"></p>
+
     <div class="articles" id="articles"></div>
 
+    <!-- PAGINATION -->
+
     <div class="pagination" id="pagination" hidden>
+
       <button id="previous-page" type="button">
         ← Précédent
       </button>
@@ -372,14 +646,20 @@ footer {
       <button id="next-page" type="button">
         Suivant →
       </button>
+
     </div>
+
   </section>
 
 </main>
 
+<!-- PIED DE PAGE -->
+
 <footer>
   © 2026 90MINUTES — LE FOOTBALL DÉCRYPTÉ
 </footer>
+
+<!-- CHARGEMENT DES ARTICLES -->
 
 <script>
 
@@ -397,6 +677,8 @@ const leagueNames = {
   "champions-league": "Ligue des champions"
 };
 
+/* 9 ARTICLES PAR PAGE */
+
 const ARTICLES_PER_PAGE = 9;
 
 let cachedArticles = null;
@@ -404,6 +686,8 @@ let currentArticles = [];
 let currentPage = 1;
 let selectedLeague = "";
 let requestNumber = 0;
+
+/* PROTECTION DU TEXTE HTML */
 
 function escapeHTML(value) {
   return String(value ?? "").replace(/[&<>"']/g, char => ({
@@ -415,6 +699,8 @@ function escapeHTML(value) {
   })[char]);
 }
 
+/* LECTURE DES INFORMATIONS MARKDOWN */
+
 function getField(markdown, name) {
   const match = markdown.match(
     new RegExp("^" + name + ":\\s*(.*)$", "m")
@@ -422,22 +708,35 @@ function getField(markdown, name) {
 
   if (!match) return "";
 
-  return match[1].trim().replace(/^["']|["']$/g, "");
+  return match[1]
+    .trim()
+    .replace(/^["']|["']$/g, "");
 }
+
+/* CHEMIN DES IMAGES */
 
 function imageURL(image) {
   if (!image) return "";
 
-  if (image.startsWith("https://")) return image;
+  if (image.startsWith("https://")) {
+    return image;
+  }
 
-  if (image.startsWith("/")) return image;
+  if (image.startsWith("/")) {
+    return image;
+  }
 
-  return "/90minutes-v2/" + image.replace(/^\/+/, "");
+  return "/90minutes-v2/" +
+    image.replace(/^\/+/, "");
 }
+
+/* RÉCUPÉRATION DES ARTICLES */
 
 async function getArticles() {
 
-  if (cachedArticles) return cachedArticles;
+  if (cachedArticles) {
+    return cachedArticles;
+  }
 
   const response = await fetch(API);
 
@@ -448,7 +747,8 @@ async function getArticles() {
   const files = await response.json();
 
   const markdownFiles = files.filter(file =>
-    file.type === "file" && file.name.endsWith(".md")
+    file.type === "file" &&
+    file.name.endsWith(".md")
   );
 
   const articles = await Promise.all(
@@ -471,10 +771,12 @@ async function getArticles() {
         image: getField(markdown, "image"),
         slug: file.name.replace(/\.md$/, "")
       };
+
     })
   );
 
   cachedArticles = articles;
+
   return articles;
 }
 
@@ -482,11 +784,20 @@ async function getArticles() {
 
 function displayPage() {
 
-  const container = document.getElementById("articles");
-  const pagination = document.getElementById("pagination");
-  const pageInfo = document.getElementById("page-info");
-  const previous = document.getElementById("previous-page");
-  const next = document.getElementById("next-page");
+  const container =
+    document.getElementById("articles");
+
+  const pagination =
+    document.getElementById("pagination");
+
+  const pageInfo =
+    document.getElementById("page-info");
+
+  const previous =
+    document.getElementById("previous-page");
+
+  const next =
+    document.getElementById("next-page");
 
   container.innerHTML = "";
 
@@ -494,7 +805,8 @@ function displayPage() {
     currentArticles.length / ARTICLES_PER_PAGE
   );
 
-  const start = (currentPage - 1) * ARTICLES_PER_PAGE;
+  const start =
+    (currentPage - 1) * ARTICLES_PER_PAGE;
 
   const pageArticles = currentArticles.slice(
     start,
@@ -509,11 +821,13 @@ function displayPage() {
     const image = imageURL(article.image);
 
     const visual = image
-      ? `<img src="${escapeHTML(image)}" alt="${escapeHTML(article.title)}">`
+      ? `<img src="${escapeHTML(image)}"
+              alt="${escapeHTML(article.title)}">`
       : "⚽";
 
     const link =
-      "article.html?slug=" + encodeURIComponent(article.slug);
+      "article.html?slug=" +
+      encodeURIComponent(article.slug);
 
     const displayedCategory =
       article.category === "Analyses tactiques"
@@ -521,9 +835,12 @@ function displayPage() {
         : article.category;
 
     card.innerHTML = `
-      <div class="visual">${visual}</div>
+      <div class="visual">
+        ${visual}
+      </div>
 
       <div class="content">
+
         <span class="category">
           ${escapeHTML(displayedCategory)}
         </span>
@@ -534,33 +851,40 @@ function displayPage() {
 
         <p>${escapeHTML(article.date.slice(0, 10))}</p>
 
-        <a class="read-more" href="${escapeHTML(link)}">
+        <a class="read-more"
+           href="${escapeHTML(link)}">
           Lire l'article
         </a>
+
       </div>
     `;
 
     container.appendChild(card);
+
   });
 
-  /* BOUTONS DE NAVIGATION */
+  /* PAGINATION */
 
   pagination.hidden = totalPages <= 1;
 
   if (totalPages > 1) {
+
     pageInfo.textContent =
       `Page ${currentPage} sur ${totalPages}`;
 
     previous.disabled = currentPage === 1;
+
     next.disabled = currentPage === totalPages;
   }
 }
 
-/* CHOISIR UN CHAMPIONNAT */
+/* SÉLECTION DU CHAMPIONNAT */
 
 async function showLeague(league) {
 
-  if (!leagueNames[league]) return;
+  if (!leagueNames[league]) {
+    return;
+  }
 
   selectedLeague = league;
   currentPage = 1;
@@ -568,39 +892,61 @@ async function showLeague(league) {
   const thisRequest = ++requestNumber;
 
   document.querySelectorAll(".league").forEach(button => {
+
     button.classList.toggle(
       "selected",
       button.dataset.league === league
     );
+
   });
 
-  const results = document.getElementById("results");
-  const title = document.getElementById("results-title");
-  const status = document.getElementById("status");
-  const container = document.getElementById("articles");
-  const pagination = document.getElementById("pagination");
+  const results =
+    document.getElementById("results");
+
+  const title =
+    document.getElementById("results-title");
+
+  const status =
+    document.getElementById("status");
+
+  const container =
+    document.getElementById("articles");
+
+  const pagination =
+    document.getElementById("pagination");
 
   results.hidden = false;
+
   title.textContent = leagueNames[league];
-  status.textContent = "Chargement des rédactions...";
+
+  status.textContent =
+    "Chargement des rédactions...";
+
   container.innerHTML = "";
+
   pagination.hidden = true;
 
   try {
 
     const articles = await getArticles();
 
-    if (thisRequest !== requestNumber) return;
+    if (thisRequest !== requestNumber) {
+      return;
+    }
 
     currentArticles = articles
       .filter(article => article.league === league)
-      .sort((a, b) => new Date(b.date) - new Date(a.date));
+      .sort((a, b) =>
+        new Date(b.date) - new Date(a.date)
+      );
 
     status.textContent = "";
 
     if (currentArticles.length === 0) {
+
       status.textContent =
         "Aucune rédaction publiée pour ce championnat pour le moment.";
+
       return;
     }
 
@@ -608,7 +954,9 @@ async function showLeague(league) {
 
   } catch (error) {
 
-    if (thisRequest !== requestNumber) return;
+    if (thisRequest !== requestNumber) {
+      return;
+    }
 
     console.error(error);
 
@@ -627,14 +975,18 @@ async function showLeague(league) {
 document.getElementById("previous-page").addEventListener(
   "click",
   () => {
+
     if (currentPage > 1) {
+
       currentPage--;
+
       displayPage();
 
       document.getElementById("results").scrollIntoView({
         behavior: "smooth",
         block: "start"
       });
+
     }
   }
 );
@@ -644,18 +996,22 @@ document.getElementById("previous-page").addEventListener(
 document.getElementById("next-page").addEventListener(
   "click",
   () => {
+
     const totalPages = Math.ceil(
       currentArticles.length / ARTICLES_PER_PAGE
     );
 
     if (currentPage < totalPages) {
+
       currentPage++;
+
       displayPage();
 
       document.getElementById("results").scrollIntoView({
         behavior: "smooth",
         block: "start"
       });
+
     }
   }
 );
@@ -663,9 +1019,11 @@ document.getElementById("next-page").addEventListener(
 /* CLIC SUR LES CHAMPIONNATS */
 
 document.querySelectorAll(".league").forEach(button => {
+
   button.addEventListener("click", () => {
     showLeague(button.dataset.league);
   });
+
 });
 
 </script>
