@@ -1,4 +1,11 @@
 
 {
-  "articles": []
+  "articles": [
+    {
+      "titre": "PSG – Real Madrid : un choc tactique au sommet",
+      "categorie": "Analyses tactiques",
+      "introduction": "Une rencontre entre le PSG et le Real Madrid représente un duel de styles.",
+      "contenu": "Le contrôle du milieu de terrain pourrait être déterminant. Le PSG pourrait chercher à presser haut tandis que le Real Madrid pourrait exploiter les espaces en transition. Article fictif de démonstration."
+    }
+  ]
 }
