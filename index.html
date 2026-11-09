@@ -7,9 +7,7 @@
   <title>90MINUTES | Le football décrypté</title>
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -31,9 +29,7 @@
       letter-spacing: 1px;
     }
 
-    .logo span {
-      color: #d8b46a;
-    }
+    .logo span { color: #d8b46a; }
 
     nav {
       display: flex;
@@ -48,7 +44,8 @@
       font-weight: bold;
     }
 
-    nav a:hover {
+    nav a:hover,
+    nav a.active {
       color: #d8b46a;
     }
 
@@ -64,9 +61,7 @@
       margin: 0;
     }
 
-    .hero h1 span {
-      color: #d8b46a;
-    }
+    .hero h1 span { color: #d8b46a; }
 
     .hero p {
       color: #c8cdd2;
@@ -111,9 +106,7 @@
       font-size: 42px;
     }
 
-    .article-content {
-      padding: 25px;
-    }
+    .article-content { padding: 25px; }
 
     .category {
       color: #a17b35;
@@ -157,21 +150,18 @@
 <body>
 
   <header>
-    <div class="logo">
-      90MINUTES<span>.</span>
-    </div>
+    <div class="logo">90MINUTES<span>.</span></div>
 
     <nav>
-      <a href="index.html">Accueil</a>
+      <a href="index.html" class="active">Accueil</a>
       <a href="actualites.html">Actualités</a>
-      <a href="#analyses">Analyses tactiques</a>
+      <a href="analyses.html">Analyses tactiques</a>
       <a href="#decryptages">Décryptages</a>
     </nav>
   </header>
 
-  <section class="hero" id="accueil">
+  <section class="hero">
     <h1>LE FOOTBALL <span>DÉCRYPTÉ.</span></h1>
-
     <p>
       Actualités, analyses tactiques et décryptages.
       <br>
@@ -180,66 +170,56 @@
   </section>
 
   <main>
-
-    <h2 class="section-title">
-      À LA UNE
-    </h2>
+    <h2 class="section-title">À LA UNE</h2>
 
     <div class="articles">
 
       <article class="article">
         <div class="article-image">⚽</div>
-
         <div class="article-content">
           <span class="category">Actualités</span>
-
           <h3>Bienvenue sur 90MINUTES</h3>
-
           <p>
             Retrouvez les actualités du football,
             les compétitions et les grands événements.
           </p>
-
           <a href="actualites.html">
             Découvrir les actualités →
           </a>
         </div>
       </article>
 
-      <article class="article" id="analyses">
+      <article class="article">
         <div class="article-image">📋</div>
-
         <div class="article-content">
           <span class="category">Analyse tactique</span>
-
           <h3>Comprendre le jeu autrement</h3>
-
           <p>
-            Découvrez les systèmes de jeu,
-            le pressing, les transitions et
-            les stratégies des entraîneurs.
+            Systèmes de jeu, pressing, transitions
+            et stratégies des entraîneurs.
           </p>
+          <a href="analyses.html">
+            Découvrir les analyses →
+          </a>
         </div>
       </article>
 
       <article class="article" id="decryptages">
         <div class="article-image">🔎</div>
-
         <div class="article-content">
           <span class="category">Décryptage</span>
-
           <h3>Au-delà du résultat</h3>
-
           <p>
-            Des analyses pour comprendre
-            ce qui fait réellement la différence
-            sur le terrain.
+            Comprendre les moments décisifs
+            et les choix qui changent un match.
           </p>
+          <a href="#decryptages">
+            Découvrir les décryptages →
+          </a>
         </div>
       </article>
 
     </div>
-
   </main>
 
   <footer>
