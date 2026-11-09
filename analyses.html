@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Analyses tactiques | 90MINUTES</title>
+<title>Résumés de matchs | 90MINUTES</title>
 
 <style>
 * {
@@ -247,7 +247,7 @@ footer {
   <nav>
     <a href="index.html">Accueil</a>
     <a href="actualites.html">Actualités</a>
-    <a href="analyses.html" class="active">Analyses tactiques</a>
+    <a href="analyses.html" class="active">Résumés de matchs</a>
     <a href="championnats.html">Championnats</a>
   </nav>
 
@@ -271,12 +271,12 @@ footer {
 
 <main>
 
-  <!-- ANALYSES RÉCENTES -->
+  <!-- RÉSUMÉS RÉCENTS -->
 
-  <h2>DERNIÈRES ANALYSES TACTIQUES</h2>
+  <h2>DERNIERS RÉSUMÉS DE MATCHS</h2>
 
   <p id="status" class="status">
-    Chargement des analyses...
+    Chargement des résumés...
   </p>
 
   <div id="published-analyses" class="articles"></div>
@@ -333,7 +333,7 @@ footer {
   © 2026 90MINUTES — LE FOOTBALL DÉCRYPTÉ
 </footer>
 
-<!-- CHARGEMENT AUTOMATIQUE DES ANALYSES -->
+<!-- CHARGEMENT AUTOMATIQUE DES RÉSUMÉS -->
 
 <script>
 
@@ -427,14 +427,18 @@ async function loadAnalyses() {
       })
     );
 
-    /* UNIQUEMENT LES ANALYSES DES 7 DERNIERS JOURS */
+    /* RÉSUMÉS DES 7 DERNIERS JOURS */
 
     const now = new Date();
     const sevenDays = 7 * 24 * 60 * 60 * 1000;
 
     const analyses = articles
       .filter(article => {
-        if (article.category !== "Analyses tactiques") {
+
+        if (
+          article.category !== "Résumés de matchs" &&
+          article.category !== "Analyses tactiques"
+        ) {
           return false;
         }
 
@@ -455,7 +459,7 @@ async function loadAnalyses() {
 
     if (analyses.length === 0) {
       status.textContent =
-        "Aucune nouvelle analyse ces 7 derniers jours. Retrouvez les anciennes analyses dans les championnats.";
+        "Aucun nouveau résumé ces 7 derniers jours. Retrouvez les anciennes publications dans les championnats.";
       return;
     }
 
@@ -482,7 +486,7 @@ async function loadAnalyses() {
 
         <div class="content">
           <span class="category">
-            ${escapeHTML(article.category)}
+            Résumés de matchs
           </span>
 
           <h3>${escapeHTML(article.title)}</h3>
@@ -507,7 +511,7 @@ async function loadAnalyses() {
   } catch (error) {
     console.error(error);
     status.textContent =
-      "Impossible de charger les analyses pour le moment.";
+      "Impossible de charger les résumés pour le moment.";
   }
 
 }
