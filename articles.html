@@ -1,0 +1,262 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Articles | 90MINUTES</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f5f2;
+  color: #101923;
+}
+
+header {
+  background: #101923;
+  padding: 25px 6%;
+  border-bottom: 4px solid #d8b46a;
+}
+
+.logo {
+  color: white;
+  font-size: 32px;
+  font-weight: 900;
+}
+
+.logo span { color: #d8b46a; }
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  margin-top: 20px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav a:hover, nav a.active { color: #d8b46a; }
+
+.hero {
+  background: #172635;
+  color: white;
+  text-align: center;
+  padding: 70px 6%;
+}
+
+.hero h1 {
+  font-size: clamp(32px, 5vw, 55px);
+  margin: 0;
+}
+
+.hero span { color: #d8b46a; }
+
+.hero p {
+  color: #c8cdd2;
+  line-height: 1.6;
+}
+
+main {
+  max-width: 1150px;
+  margin: 45px auto;
+  padding: 0 20px;
+  min-height: 280px;
+}
+
+h2 {
+  border-left: 5px solid #d8b46a;
+  padding-left: 15px;
+}
+
+.articles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+  margin-top: 30px;
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+}
+
+.cover {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  background: #172635;
+}
+
+.placeholder {
+  height: 190px;
+  background: #172635;
+  color: #d8b46a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 45px;
+}
+
+.content { padding: 25px; }
+
+.category {
+  color: #a17b35;
+  font-size: 13px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.card h3 { line-height: 1.4; }
+
+.card p {
+  color: #59636e;
+  line-height: 1.7;
+}
+
+.article-body {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.empty {
+  background: white;
+  padding: 35px;
+  border-radius: 12px;
+  color: #59636e;
+  text-align: center;
+  margin-top: 25px;
+}
+
+footer {
+  background: #101923;
+  color: #c8cdd2;
+  text-align: center;
+  padding: 35px 6%;
+  margin-top: 70px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">90MINUTES<span>.</span></div>
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="actualites.html">Actualités</a>
+    <a href="analyses.html">Analyses tactiques</a>
+    <a href="decryptages.html">Décryptages</a>
+    <a href="articles.html" class="active">Articles</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>LES ARTICLES <span>90MINUTES.</span></h1>
+  <p>Retrouve nos actualités, analyses tactiques et décryptages.</p>
+</section>
+
+<main>
+  <h2>DERNIÈRES PUBLICATIONS</h2>
+  <div id="articles" class="articles"></div>
+  <p id="message" class="empty" role="status">
+    Chargement des articles...
+  </p>
+</main>
+
+<footer>
+  © 2026 90MINUTES — LE FOOTBALL DÉCRYPTÉ
+</footer>
+
+<script>
+async function chargerArticles() {
+  const zone = document.getElementById("articles");
+  const message = document.getElementById("message");
+
+  try {
+    const reponse = await fetch("articles.json", {
+      cache: "no-store"
+    });
+
+    if (!reponse.ok) {
+      throw new Error("Fichier introuvable");
+    }
+
+    const donnees = await reponse.json();
+    const articles = donnees.articles;
+
+    if (!Array.isArray(articles)) {
+      throw new Error("Format des articles incorrect");
+    }
+
+    if (articles.length === 0) {
+      message.textContent =
+        "Aucun article publié pour le moment. Les premières publications arrivent bientôt !";
+      return;
+    }
+
+    message.hidden = true;
+
+    articles.forEach(article => {
+      const carte = document.createElement("article");
+      carte.className = "card";
+
+      if (article.image &&
+          /^https:\/\//i.test(article.image)) {
+        const image = document.createElement("img");
+        image.className = "cover";
+        image.src = article.image;
+        image.alt = "Couverture de l'article";
+        image.loading = "lazy";
+        carte.appendChild(image);
+      } else {
+        const visuel = document.createElement("div");
+        visuel.className = "placeholder";
+        visuel.textContent = "⚽";
+        carte.appendChild(visuel);
+      }
+
+      const contenu = document.createElement("div");
+      contenu.className = "content";
+
+      const categorie = document.createElement("span");
+      categorie.className = "category";
+      categorie.textContent = article.categorie || "Football";
+
+      const titre = document.createElement("h3");
+      titre.textContent = article.titre || "Sans titre";
+
+      const introduction = document.createElement("p");
+      introduction.textContent = article.introduction || "";
+
+      const texte = document.createElement("p");
+      texte.className = "article-body";
+      texte.textContent = article.contenu || "";
+
+      contenu.append(categorie, titre, introduction, texte);
+      carte.appendChild(contenu);
+      zone.appendChild(carte);
+    });
+
+  } catch (erreur) {
+    message.hidden = false;
+    message.textContent =
+      "Impossible de charger les articles pour le moment.";
+    console.error(erreur);
+  }
+}
+
+chargerArticles();
+</script>
+
+</body>
+</html>
