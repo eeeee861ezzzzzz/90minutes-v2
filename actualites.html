@@ -31,6 +31,7 @@
       align-items: center;
       gap: 14px;
       text-decoration: none;
+      max-width: 100%;
     }
 
     .logo img {
@@ -38,6 +39,7 @@
       height: 65px;
       object-fit: contain;
       border-radius: 10px;
+      flex-shrink: 0;
     }
 
     .logo-text {
@@ -87,11 +89,15 @@
     .subtitle {
       color: #59636e;
       font-size: 18px;
+      line-height: 1.6;
     }
 
     .articles {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      grid-template-columns: repeat(
+        auto-fit,
+        minmax(270px, 1fr)
+      );
       gap: 24px;
       margin-top: 35px;
     }
@@ -104,7 +110,10 @@
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 5px 20px rgba(0,0,0,0.06);
-      transition: transform 0.2s, border-color 0.2s;
+      transition:
+        transform 0.2s,
+        border-color 0.2s;
+      min-width: 0;
     }
 
     .article:hover {
@@ -134,11 +143,13 @@
       font-size: 23px;
       margin: 12px 0;
       line-height: 1.3;
+      overflow-wrap: anywhere;
     }
 
     .article p {
       color: #59636e;
       line-height: 1.6;
+      overflow-wrap: anywhere;
     }
 
     .date {
@@ -164,6 +175,7 @@
     .status {
       color: #59636e;
       margin-top: 30px;
+      line-height: 1.6;
     }
 
     /* PIED DE PAGE */
@@ -176,28 +188,152 @@
       margin-top: 70px;
     }
 
+    /* TABLETTES */
+
+    @media (max-width: 800px) {
+      nav {
+        gap: 18px;
+      }
+
+      main {
+        margin: 35px auto;
+      }
+    }
+
     /* VERSION MOBILE */
 
     @media (max-width: 600px) {
-      h1 {
-        font-size: 32px;
-      }
-
-      .articles {
-        grid-template-columns: 1fr;
+      header {
+        padding: 15px 5%;
       }
 
       .logo img {
-        width: 48px;
-        height: 48px;
+        width: 46px;
+        height: 46px;
       }
 
       .logo-text {
         font-size: 22px;
+        letter-spacing: 0;
       }
 
       .logo {
         gap: 9px;
+      }
+
+      /* MENU SUR DEUX COLONNES */
+
+      nav {
+        display: grid;
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 18px;
+      }
+
+      nav a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        min-height: 42px;
+        padding: 9px 6px;
+        font-size: 13px;
+        line-height: 1.35;
+        background: #101923;
+        border: 1px solid #304456;
+        border-radius: 7px;
+      }
+
+      nav a.active {
+        border-color: #d8b46a;
+      }
+
+      /* CONTENU */
+
+      main {
+        margin: 28px auto;
+        padding: 0 16px;
+      }
+
+      h1 {
+        font-size: 32px;
+        margin-bottom: 12px;
+      }
+
+      .subtitle {
+        font-size: 15px;
+      }
+
+      /* ARTICLES */
+
+      .articles {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 18px;
+        margin-top: 25px;
+      }
+
+      .article-image {
+        height: auto;
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
+      }
+
+      .article-body {
+        padding: 20px;
+      }
+
+      .category {
+        font-size: 12px;
+      }
+
+      .article h2 {
+        font-size: 20px;
+        line-height: 1.4;
+      }
+
+      .article p {
+        font-size: 15px;
+      }
+
+      .date {
+        font-size: 13px;
+      }
+
+      /* BOUTON */
+
+      .read-more {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        padding: 12px 20px;
+        font-size: 14px;
+      }
+
+      /* PIED DE PAGE */
+
+      footer {
+        margin-top: 45px;
+        padding: 28px 16px;
+        font-size: 13px;
+        line-height: 1.6;
+      }
+    }
+
+    /* TRÈS PETITS ÉCRANS */
+
+    @media (max-width: 360px) {
+      .logo-text {
+        font-size: 19px;
+      }
+
+      nav a {
+        font-size: 12px;
+      }
+
+      h1 {
+        font-size: 29px;
       }
     }
   </style>
@@ -294,44 +430,58 @@
         return image;
       }
 
-      return "/90minutes-v2/" + image.replace(/^\/+/, "");
+      return "/90minutes-v2/" +
+        image.replace(/^\/+/, "");
     }
 
     async function loadArticles() {
 
-      const status = document.getElementById("status");
-      const container = document.getElementById("articles");
+      const status =
+        document.getElementById("status");
+
+      const container =
+        document.getElementById("articles");
 
       try {
 
         const response = await fetch(api);
 
         if (!response.ok) {
-          throw new Error("Impossible de lire les publications");
+          throw new Error(
+            "Impossible de lire les publications"
+          );
         }
 
         const files = await response.json();
 
         const markdownFiles = files.filter(file =>
-          file.type === "file" && file.name.endsWith(".md")
+          file.type === "file" &&
+          file.name.endsWith(".md")
         );
 
         const articles = await Promise.all(
           markdownFiles.map(async file => {
 
-            const articleResponse = await fetch(file.download_url);
+            const articleResponse =
+              await fetch(file.download_url);
 
             if (!articleResponse.ok) {
-              throw new Error("Article inaccessible");
+              throw new Error(
+                "Article inaccessible"
+              );
             }
 
-            const markdown = await articleResponse.text();
+            const markdown =
+              await articleResponse.text();
 
             return {
               title: getField(markdown, "title"),
               category: getField(markdown, "category"),
               date: getField(markdown, "date"),
-              description: getField(markdown, "description"),
+              description: getField(
+                markdown,
+                "description"
+              ),
               image: getField(markdown, "image"),
               slug: file.name.replace(/\.md$/, "")
             };
@@ -342,7 +492,8 @@
         /* ACTUALITÉS DES 7 DERNIERS JOURS */
 
         const now = new Date();
-        const sevenDays = 7 * 24 * 60 * 60 * 1000;
+        const sevenDays =
+          7 * 24 * 60 * 60 * 1000;
 
         const actualites = articles
           .filter(article => {
@@ -351,18 +502,23 @@
               return false;
             }
 
-            const published = new Date(article.date);
+            const published =
+              new Date(article.date);
+
             const age = now - published;
 
             return (
-              !Number.isNaN(published.getTime()) &&
+              !Number.isNaN(
+                published.getTime()
+              ) &&
               age >= 0 &&
               age <= sevenDays
             );
 
           })
           .sort((a, b) =>
-            new Date(b.date) - new Date(a.date)
+            new Date(b.date) -
+            new Date(a.date)
           );
 
         status.textContent = "";
@@ -377,10 +533,13 @@
 
         actualites.forEach(article => {
 
-          const card = document.createElement("article");
+          const card =
+            document.createElement("article");
+
           card.className = "article";
 
-          const image = imageURL(article.image);
+          const image =
+            imageURL(article.image);
 
           const imageHTML = image
             ? `<img class="article-image"
@@ -410,7 +569,9 @@
               </p>
 
               <p class="date">
-                ${escapeHTML(article.date.slice(0, 10))}
+                ${escapeHTML(
+                  article.date.slice(0, 10)
+                )}
               </p>
 
               <a class="read-more"
