@@ -4,7 +4,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>90MINUTES | Le football décrypté</title>
 
 <style>
@@ -243,6 +242,7 @@ footer {
     <a href="index.html" class="active">Accueil</a>
     <a href="actualites.html">Actualités</a>
     <a href="analyses.html">Analyses tactiques</a>
+    <a href="championnats.html">Championnats</a>
   </nav>
 
 </header>
@@ -331,6 +331,29 @@ footer {
 
     </article>
 
+    <article class="article">
+
+      <div class="article-image">🏆</div>
+
+      <div class="article-content">
+
+        <span class="category">Championnats</span>
+
+        <h3>Retrouver les rédactions par compétition</h3>
+
+        <p>
+          LaLiga, Premier League, Ligue 1,
+          Serie A, Bundesliga et Ligue des champions.
+        </p>
+
+        <a href="championnats.html">
+          Découvrir les championnats →
+        </a>
+
+      </div>
+
+    </article>
+
   </div>
 
 </main>
@@ -349,7 +372,6 @@ const API =
   `https://api.github.com/repos/${REPO}/contents/publications`;
 
 function escapeHTML(value) {
-
   return String(value ?? "").replace(/[&<>"']/g, char => ({
     "&": "&amp;",
     "<": "&lt;",
@@ -357,11 +379,9 @@ function escapeHTML(value) {
     '"': "&quot;",
     "'": "&#39;"
   })[char]);
-
 }
 
 function getField(markdown, name) {
-
   const match = markdown.match(
     new RegExp("^" + name + ":\\s*(.*)$", "m")
   );
@@ -371,11 +391,9 @@ function getField(markdown, name) {
   return match[1]
     .trim()
     .replace(/^["']|["']$/g, "");
-
 }
 
 function imageURL(image) {
-
   if (!image) return "";
 
   if (image.startsWith("https://")) {
@@ -388,7 +406,6 @@ function imageURL(image) {
 
   return "/90minutes-v2/" +
     image.replace(/^\/+/, "");
-
 }
 
 async function loadLatestArticles() {
@@ -439,18 +456,33 @@ async function loadLatestArticles() {
       })
     );
 
-    articles.sort((a, b) =>
-      new Date(b.date) - new Date(a.date)
-    );
+    /* PUBLICATIONS DES 7 DERNIERS JOURS */
 
-    const latest = articles.slice(0, 3);
+    const now = new Date();
+    const sevenDays = 7 * 24 * 60 * 60 * 1000;
+
+    const latest = articles
+      .filter(article => {
+        const published = new Date(article.date);
+        const age = now - published;
+
+        return (
+          !Number.isNaN(published.getTime()) &&
+          age >= 0 &&
+          age <= sevenDays
+        );
+      })
+      .sort((a, b) =>
+        new Date(b.date) - new Date(a.date)
+      )
+      .slice(0, 3);
 
     status.textContent = "";
 
     if (latest.length === 0) {
 
       status.textContent =
-        "Les premiers articles arrivent bientôt sur 90MINUTES.";
+        "Aucune nouvelle publication ces 7 derniers jours. Retrouvez toutes nos rédactions dans les championnats.";
 
       return;
     }
