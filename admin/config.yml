@@ -1,0 +1,43 @@
+
+backend:
+  name: github
+  repo: eeeee861ezzzzzz/90minutes-v2
+  branch: main
+
+media_folder: "images"
+public_folder: "/90minutes-v2/images"
+
+locale: "fr"
+
+collections:
+  - name: "articles"
+    label: "Articles"
+    folder: "publications"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - label: "Titre"
+        name: "title"
+        widget: "string"
+      - label: "Rubrique"
+        name: "category"
+        widget: "select"
+        options:
+          - "Actualités"
+          - "Analyses tactiques"
+          - "Décryptages"
+      - label: "Date"
+        name: "date"
+        widget: "datetime"
+      - label: "Image de couverture"
+        name: "image"
+        widget: "image"
+        required: false
+      - label: "Introduction"
+        name: "description"
+        widget: "text"
+      - label: "Contenu de l'article"
+        name: "body"
+        widget: "markdown"
