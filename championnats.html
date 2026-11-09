@@ -265,7 +265,7 @@ footer {
   <nav>
     <a href="index.html">Accueil</a>
     <a href="actualites.html">Actualités</a>
-    <a href="analyses.html">Analyses tactiques</a>
+    <a href="analyses.html">Résumés de matchs</a>
     <a href="championnats.html" class="active">Championnats</a>
   </nav>
 </header>
@@ -469,12 +469,17 @@ async function showLeague(league) {
       const link =
         "article.html?slug=" + encodeURIComponent(article.slug);
 
+      const displayedCategory =
+        article.category === "Analyses tactiques"
+          ? "Résumés de matchs"
+          : article.category;
+
       card.innerHTML = `
         <div class="visual">${visual}</div>
 
         <div class="content">
           <span class="category">
-            ${escapeHTML(article.category)}
+            ${escapeHTML(displayedCategory)}
           </span>
 
           <h3>${escapeHTML(article.title)}</h3>
