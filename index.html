@@ -4,10 +4,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>90MINUTES | Le football décrypté</title>
 
 <style>
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
@@ -15,6 +18,8 @@ body {
   background: #f5f5f2;
   color: #101923;
 }
+
+/* EN-TÊTE */
 
 header {
   background: #101923;
@@ -24,16 +29,28 @@ header {
 }
 
 .logo-link {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
   text-decoration: none;
 }
 
 .logo-img {
-  display: block;
-  width: 190px;
-  max-width: 100%;
-  height: auto;
-  border-radius: 6px;
+  width: 65px;
+  height: 65px;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+.logo-text {
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: white;
+}
+
+.logo-text span {
+  color: #d8b46a;
 }
 
 nav {
@@ -54,6 +71,8 @@ nav .active {
   color: #d8b46a;
 }
 
+/* ACCUEIL */
+
 .hero {
   background: #172635;
   color: white;
@@ -66,13 +85,17 @@ nav .active {
   margin: 0;
 }
 
-.hero h1 span { color: #d8b46a; }
+.hero h1 span {
+  color: #d8b46a;
+}
 
 .hero p {
   color: #c8cdd2;
   font-size: 19px;
   line-height: 1.6;
 }
+
+/* CONTENU */
 
 main {
   max-width: 1200px;
@@ -121,7 +144,9 @@ main {
   object-fit: cover;
 }
 
-.article-content { padding: 25px; }
+.article-content {
+  padding: 25px;
+}
 
 .category {
   color: #a17b35;
@@ -157,6 +182,8 @@ main {
   margin: 20px 0;
 }
 
+/* PIED DE PAGE */
+
 footer {
   margin-top: 70px;
   background: #101923;
@@ -165,23 +192,51 @@ footer {
   text-align: center;
 }
 
+/* MOBILE */
+
 @media (max-width: 600px) {
-  .hero { padding: 65px 6%; }
-  .section-title { font-size: 24px; }
-  .logo-img { width: 155px; }
+  .hero {
+    padding: 65px 6%;
+  }
+
+  .section-title {
+    font-size: 24px;
+  }
+
+  .logo-img {
+    width: 48px;
+    height: 48px;
+  }
+
+  .logo-text {
+    font-size: 22px;
+  }
+
+  .logo-link {
+    gap: 9px;
+  }
 }
 </style>
 </head>
 
 <body>
 
+<!-- LOGO ET NAVIGATION -->
+
 <header>
+
   <a class="logo-link" href="index.html">
+
     <img
       class="logo-img"
-      src="Capture%20d%27%C3%A9cran%202026-11-09%20153748.png"
-      alt="90MINUTES - Le football décrypté"
+      src="Ic%C3%B4ne%20%C2%AB%2090%20%C2%BB%20avec%20ballon%20et%20swoosh%20dor%C3%A9.png"
+      alt="Logo 90MINUTES"
     >
+
+    <span class="logo-text">
+      90MINUTES<span>.</span>
+    </span>
+
   </a>
 
   <nav>
@@ -190,20 +245,32 @@ footer {
     <a href="analyses.html">Analyses tactiques</a>
     <a href="decryptages.html">Décryptages</a>
   </nav>
+
 </header>
 
+<!-- BANNIÈRE -->
+
 <section class="hero">
-  <h1>LE FOOTBALL <span>DÉCRYPTÉ.</span></h1>
+
+  <h1>
+    LE FOOTBALL <span>DÉCRYPTÉ.</span>
+  </h1>
 
   <p>
     Actualités, analyses tactiques et décryptages.
     <br>
     Une autre manière de comprendre le football.
   </p>
+
 </section>
 
+<!-- PUBLICATIONS -->
+
 <main>
-  <h2 class="section-title">DERNIÈRES PUBLICATIONS</h2>
+
+  <h2 class="section-title">
+    DERNIÈRES PUBLICATIONS
+  </h2>
 
   <p id="status" class="status">
     Chargement des derniers articles...
@@ -211,59 +278,102 @@ footer {
 
   <div id="latest-articles" class="articles"></div>
 
-  <h2 class="section-title">DÉCOUVRIR 90MINUTES</h2>
+  <!-- RUBRIQUES -->
+
+  <h2 class="section-title">
+    DÉCOUVRIR 90MINUTES
+  </h2>
 
   <div class="articles">
+
     <article class="article">
+
       <div class="article-image">⚽</div>
+
       <div class="article-content">
+
         <span class="category">Actualités</span>
+
         <h3>Toute l'actualité du football</h3>
+
         <p>
           Transferts, championnats, compétitions
           et informations du football mondial.
         </p>
-        <a href="actualites.html">Découvrir les actualités →</a>
+
+        <a href="actualites.html">
+          Découvrir les actualités →
+        </a>
+
       </div>
+
     </article>
 
     <article class="article">
+
       <div class="article-image">📋</div>
+
       <div class="article-content">
+
         <span class="category">Analyse tactique</span>
+
         <h3>Comprendre le jeu autrement</h3>
+
         <p>
           Systèmes de jeu, pressing, transitions
           et stratégies des entraîneurs.
         </p>
-        <a href="analyses.html">Découvrir les analyses →</a>
+
+        <a href="analyses.html">
+          Découvrir les analyses →
+        </a>
+
       </div>
+
     </article>
 
     <article class="article">
+
       <div class="article-image">🔎</div>
+
       <div class="article-content">
+
         <span class="category">Décryptage</span>
+
         <h3>Au-delà du résultat</h3>
+
         <p>
           Comprendre les décisions et les moments
           qui changent le cours d'un match.
         </p>
-        <a href="decryptages.html">Découvrir les décryptages →</a>
+
+        <a href="decryptages.html">
+          Découvrir les décryptages →
+        </a>
+
       </div>
+
     </article>
+
   </div>
+
 </main>
 
 <footer>
   © 2026 90MINUTES — LE FOOTBALL DÉCRYPTÉ
 </footer>
 
+<!-- CHARGEMENT AUTOMATIQUE DES ARTICLES -->
+
 <script>
+
 const REPO = "eeeee861ezzzzzz/90minutes-v2";
-const API = `https://api.github.com/repos/${REPO}/contents/publications`;
+
+const API =
+  `https://api.github.com/repos/${REPO}/contents/publications`;
 
 function escapeHTML(value) {
+
   return String(value ?? "").replace(/[&<>"']/g, char => ({
     "&": "&amp;",
     "<": "&lt;",
@@ -271,19 +381,25 @@ function escapeHTML(value) {
     '"': "&quot;",
     "'": "&#39;"
   })[char]);
+
 }
 
 function getField(markdown, name) {
+
   const match = markdown.match(
     new RegExp("^" + name + ":\\s*(.*)$", "m")
   );
 
   if (!match) return "";
 
-  return match[1].trim().replace(/^["']|["']$/g, "");
+  return match[1]
+    .trim()
+    .replace(/^["']|["']$/g, "");
+
 }
 
 function imageURL(image) {
+
   if (!image) return "";
 
   if (image.startsWith("https://")) {
@@ -294,35 +410,46 @@ function imageURL(image) {
     return image;
   }
 
-  return "/90minutes-v2/" + image.replace(/^\/+/, "");
+  return "/90minutes-v2/" +
+    image.replace(/^\/+/, "");
+
 }
 
 async function loadLatestArticles() {
-  const status = document.getElementById("status");
-  const container = document.getElementById("latest-articles");
+
+  const status =
+    document.getElementById("status");
+
+  const container =
+    document.getElementById("latest-articles");
 
   try {
+
     const response = await fetch(API);
 
     if (!response.ok) {
-      throw new Error("Impossible de récupérer les publications");
+      throw new Error("Publications indisponibles");
     }
 
     const files = await response.json();
 
     const markdownFiles = files.filter(file =>
-      file.type === "file" && file.name.endsWith(".md")
+      file.type === "file" &&
+      file.name.endsWith(".md")
     );
 
     const articles = await Promise.all(
       markdownFiles.map(async file => {
-        const articleResponse = await fetch(file.download_url);
+
+        const articleResponse =
+          await fetch(file.download_url);
 
         if (!articleResponse.ok) {
           throw new Error("Article inaccessible");
         }
 
-        const markdown = await articleResponse.text();
+        const markdown =
+          await articleResponse.text();
 
         return {
           title: getField(markdown, "title"),
@@ -332,6 +459,7 @@ async function loadLatestArticles() {
           image: getField(markdown, "image"),
           slug: file.name.replace(/\.md$/, "")
         };
+
       })
     );
 
@@ -340,16 +468,22 @@ async function loadLatestArticles() {
     );
 
     const latest = articles.slice(0, 3);
+
     status.textContent = "";
 
     if (latest.length === 0) {
+
       status.textContent =
         "Les premiers articles arrivent bientôt sur 90MINUTES.";
+
       return;
     }
 
     latest.forEach(article => {
-      const card = document.createElement("article");
+
+      const card =
+        document.createElement("article");
+
       card.className = "article";
 
       const image = imageURL(article.image);
@@ -364,39 +498,56 @@ async function loadLatestArticles() {
         encodeURIComponent(article.slug);
 
       card.innerHTML = `
-        <div class="article-image">${imageHTML}</div>
+
+        <div class="article-image">
+          ${imageHTML}
+        </div>
 
         <div class="article-content">
+
           <span class="category">
             ${escapeHTML(article.category)}
           </span>
 
-          <h3>${escapeHTML(article.title)}</h3>
-
-          <p>${escapeHTML(article.description)}</p>
+          <h3>
+            ${escapeHTML(article.title)}
+          </h3>
 
           <p>
-            <small>${escapeHTML(article.date.slice(0, 10))}</small>
+            ${escapeHTML(article.description)}
+          </p>
+
+          <p>
+            <small>
+              ${escapeHTML(article.date.slice(0, 10))}
+            </small>
           </p>
 
           <a href="${escapeHTML(link)}">
             Lire l'article →
           </a>
+
         </div>
+
       `;
 
       container.appendChild(card);
+
     });
 
   } catch (error) {
+
     console.error(error);
 
     status.textContent =
       "Impossible de charger les derniers articles pour le moment.";
+
   }
+
 }
 
 loadLatestArticles();
+
 </script>
 
 </body>
