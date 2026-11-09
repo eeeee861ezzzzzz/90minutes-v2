@@ -138,8 +138,8 @@
     <nav>
       <a href="index.html">Accueil</a>
       <a href="actualites.html">Actualités</a>
-      <a href="analyses.html">Analyses tactiques</a>
-      <a href="decryptages.html">Décryptages</a>
+      <a href="analyses.html">Résumés de matchs</a>
+      <a href="championnats.html">Championnats</a>
     </nav>
   </header>
 
@@ -224,15 +224,23 @@
         const title = field(frontmatter, "title");
         const category = field(frontmatter, "category");
         const date = field(frontmatter, "date");
-        const description = field(frontmatter, "description");
+        const description =
+          field(frontmatter, "introduction") ||
+          field(frontmatter, "description");
         const image = field(frontmatter, "image");
 
         document.title = (title || "Article") + " | 90MINUTES";
 
         document.getElementById("title").textContent = title;
-        document.getElementById("category").textContent = category;
+
+        document.getElementById("category").textContent =
+          category === "Analyses tactiques"
+            ? "Résumés de matchs"
+            : category;
+
         document.getElementById("date").textContent =
           date.slice(0, 10);
+
         document.getElementById("description").textContent =
           description;
 
