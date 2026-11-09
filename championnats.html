@@ -1,0 +1,516 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Championnats | 90MINUTES</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f5f5f2;
+  color: #101923;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  background: #101923;
+  color: white;
+  padding: 18px 6%;
+  border-bottom: 4px solid #d8b46a;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+}
+
+.logo img {
+  width: 65px;
+  height: 65px;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+.logo-text {
+  color: white;
+  font-size: 30px;
+  font-weight: 900;
+}
+
+.logo-text span {
+  color: #d8b46a;
+}
+
+nav {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav a:hover,
+nav a.active {
+  color: #d8b46a;
+}
+
+.hero {
+  background: #172635;
+  padding: 70px 6%;
+  text-align: center;
+  color: white;
+}
+
+.hero h1 {
+  font-size: clamp(35px, 6vw, 60px);
+  margin: 0;
+}
+
+.hero h1 span {
+  color: #d8b46a;
+}
+
+.hero p {
+  color: #c8cdd2;
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+main {
+  max-width: 1200px;
+  margin: 45px auto;
+  padding: 0 20px;
+}
+
+h2 {
+  border-left: 5px solid #d8b46a;
+  padding-left: 15px;
+}
+
+.leagues {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-top: 30px;
+}
+
+.league {
+  border: 2px solid transparent;
+  border-radius: 14px;
+  background: white;
+  min-height: 190px;
+  padding: 25px 15px;
+  cursor: pointer;
+  text-align: center;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+  transition: 0.2s;
+  color: #101923;
+  font: inherit;
+}
+
+.league:hover,
+.league.selected {
+  border-color: #d8b46a;
+  transform: translateY(-3px);
+}
+
+.league img {
+  width: 110px;
+  height: 105px;
+  object-fit: contain;
+  margin-bottom: 12px;
+}
+
+.league strong {
+  display: block;
+  font-size: 17px;
+}
+
+.results {
+  margin-top: 55px;
+}
+
+.articles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+  margin-top: 25px;
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+}
+
+.visual {
+  height: 180px;
+  background: #172635;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+}
+
+.visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.content {
+  padding: 24px;
+}
+
+.category {
+  color: #a17b35;
+  font-size: 13px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.content h3 {
+  line-height: 1.4;
+}
+
+.content p {
+  color: #59636e;
+  line-height: 1.7;
+}
+
+.read-more {
+  display: inline-block;
+  padding: 12px 18px;
+  background: #d8b46a;
+  color: #101923;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 6px;
+}
+
+.status {
+  color: #59636e;
+  line-height: 1.7;
+}
+
+footer {
+  background: #101923;
+  color: #c8cdd2;
+  text-align: center;
+  padding: 35px 6%;
+  margin-top: 70px;
+}
+
+@media(max-width:700px) {
+  .leagues {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .league {
+    min-height: 155px;
+    padding: 18px 10px;
+  }
+
+  .league img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .logo img {
+    width: 48px;
+    height: 48px;
+  }
+
+  .logo-text {
+    font-size: 22px;
+  }
+
+  .hero {
+    padding: 55px 6%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <a class="logo" href="index.html">
+    <img
+      src="Ic%C3%B4ne%20%C2%AB%2090%20%C2%BB%20avec%20ballon%20et%20swoosh%20dor%C3%A9.png"
+      alt="Logo 90MINUTES"
+    >
+    <span class="logo-text">
+      90MINUTES<span>.</span>
+    </span>
+  </a>
+
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="actualites.html">Actualités</a>
+    <a href="analyses.html">Analyses tactiques</a>
+    <a href="championnats.html" class="active">Championnats</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>NOS <span>CHAMPIONNATS.</span></h1>
+  <p>
+    Choisissez une compétition et retrouvez
+    toutes les rédactions de 90MINUTES.
+  </p>
+</section>
+
+<main>
+
+  <h2>CHOISIR UNE COMPÉTITION</h2>
+
+  <div class="leagues">
+
+    <button class="league" data-league="liga">
+      <img src="https://media.api-sports.io/football/leagues/140.png" alt="LaLiga">
+      <strong>LaLiga</strong>
+    </button>
+
+    <button class="league" data-league="premier-league">
+      <img src="https://media.api-sports.io/football/leagues/39.png" alt="Premier League">
+      <strong>Premier League</strong>
+    </button>
+
+    <button class="league" data-league="ligue-1">
+      <img src="https://media.api-sports.io/football/leagues/61.png" alt="Ligue 1">
+      <strong>Ligue 1</strong>
+    </button>
+
+    <button class="league" data-league="serie-a">
+      <img src="https://media.api-sports.io/football/leagues/135.png" alt="Serie A">
+      <strong>Serie A</strong>
+    </button>
+
+    <button class="league" data-league="bundesliga">
+      <img src="https://media.api-sports.io/football/leagues/78.png" alt="Bundesliga">
+      <strong>Bundesliga</strong>
+    </button>
+
+    <button class="league" data-league="champions-league">
+      <img src="https://media.api-sports.io/football/leagues/2.png" alt="Ligue des champions">
+      <strong>Ligue des champions</strong>
+    </button>
+
+  </div>
+
+  <section class="results" id="results" hidden>
+    <h2 id="results-title"></h2>
+    <p class="status" id="status"></p>
+    <div class="articles" id="articles"></div>
+  </section>
+
+</main>
+
+<footer>
+  © 2026 90MINUTES — LE FOOTBALL DÉCRYPTÉ
+</footer>
+
+<script>
+
+const REPO = "eeeee861ezzzzzz/90minutes-v2";
+
+const API =
+  `https://api.github.com/repos/${REPO}/contents/publications`;
+
+const leagueNames = {
+  "liga": "LaLiga",
+  "premier-league": "Premier League",
+  "ligue-1": "Ligue 1",
+  "serie-a": "Serie A",
+  "bundesliga": "Bundesliga",
+  "champions-league": "Ligue des champions"
+};
+
+let cachedArticles = null;
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[char]);
+}
+
+function getField(markdown, name) {
+  const match = markdown.match(
+    new RegExp("^" + name + ":\\s*(.*)$", "m")
+  );
+
+  if (!match) return "";
+
+  return match[1].trim().replace(/^["']|["']$/g, "");
+}
+
+function imageURL(image) {
+  if (!image) return "";
+
+  if (image.startsWith("https://")) return image;
+
+  if (image.startsWith("/")) return image;
+
+  return "/90minutes-v2/" + image.replace(/^\/+/, "");
+}
+
+async function getArticles() {
+
+  if (cachedArticles) return cachedArticles;
+
+  const response = await fetch(API);
+
+  if (!response.ok) {
+    throw new Error("Publications indisponibles");
+  }
+
+  const files = await response.json();
+
+  const markdownFiles = files.filter(file =>
+    file.type === "file" && file.name.endsWith(".md")
+  );
+
+  cachedArticles = await Promise.all(
+    markdownFiles.map(async file => {
+
+      const response = await fetch(file.download_url);
+
+      if (!response.ok) {
+        throw new Error("Article inaccessible");
+      }
+
+      const markdown = await response.text();
+
+      return {
+        title: getField(markdown, "title"),
+        category: getField(markdown, "category"),
+        league: getField(markdown, "league"),
+        date: getField(markdown, "date"),
+        description: getField(markdown, "description"),
+        image: getField(markdown, "image"),
+        slug: file.name.replace(/\.md$/, "")
+      };
+    })
+  );
+
+  return cachedArticles;
+}
+
+async function showLeague(league) {
+
+  if (!leagueNames[league]) return;
+
+  document.querySelectorAll(".league").forEach(button => {
+    button.classList.toggle(
+      "selected",
+      button.dataset.league === league
+    );
+  });
+
+  const results = document.getElementById("results");
+  const title = document.getElementById("results-title");
+  const status = document.getElementById("status");
+  const container = document.getElementById("articles");
+
+  results.hidden = false;
+  title.textContent = leagueNames[league];
+  status.textContent = "Chargement des rédactions...";
+  container.innerHTML = "";
+
+  try {
+
+    const articles = await getArticles();
+
+    const filtered = articles
+      .filter(article => article.league === league)
+      .sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    status.textContent = "";
+
+    if (filtered.length === 0) {
+      status.textContent =
+        "Aucune rédaction publiée pour ce championnat pour le moment.";
+      return;
+    }
+
+    filtered.forEach(article => {
+
+      const card = document.createElement("article");
+      card.className = "card";
+
+      const image = imageURL(article.image);
+
+      const visual = image
+        ? `<img src="${escapeHTML(image)}" alt="${escapeHTML(article.title)}">`
+        : "⚽";
+
+      const link =
+        "article.html?slug=" + encodeURIComponent(article.slug);
+
+      card.innerHTML = `
+        <div class="visual">${visual}</div>
+
+        <div class="content">
+          <span class="category">
+            ${escapeHTML(article.category)}
+          </span>
+
+          <h3>${escapeHTML(article.title)}</h3>
+
+          <p>${escapeHTML(article.description)}</p>
+
+          <p>${escapeHTML(article.date.slice(0, 10))}</p>
+
+          <a class="read-more" href="${escapeHTML(link)}">
+            Lire l'article
+          </a>
+        </div>
+      `;
+
+      container.appendChild(card);
+    });
+
+  } catch (error) {
+    console.error(error);
+    status.textContent =
+      "Impossible de charger les rédactions pour le moment.";
+  }
+
+  results.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+}
+
+document.querySelectorAll(".league").forEach(button => {
+  button.addEventListener("click", () => {
+    showLeague(button.dataset.league);
+  });
+});
+
+</script>
+
+</body>
+</html>
