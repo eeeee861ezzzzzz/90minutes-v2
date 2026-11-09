@@ -30,7 +30,7 @@ collections:
         widget: "select"
         options:
           - "Actualités"
-          - "Analyses tactiques"
+          - "Résumés de matchs"
 
       - label: "Championnat"
         name: "league"
