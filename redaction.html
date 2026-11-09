@@ -1,0 +1,360 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Espace rédaction | 90MINUTES</title>
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f5f2;
+  color: #101923;
+}
+
+header {
+  background: #101923;
+  color: white;
+  padding: 25px 6%;
+  border-bottom: 4px solid #d8b46a;
+}
+
+.logo {
+  font-size: 32px;
+  font-weight: 900;
+}
+
+.logo span { color: #d8b46a; }
+
+nav {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav a:hover { color: #d8b46a; }
+
+.hero {
+  background: #172635;
+  color: white;
+  text-align: center;
+  padding: 55px 6%;
+}
+
+.hero h1 {
+  font-size: clamp(30px, 5vw, 48px);
+  margin: 0;
+}
+
+.hero span { color: #d8b46a; }
+
+.hero p {
+  color: #c8cdd2;
+  line-height: 1.6;
+}
+
+main {
+  max-width: 950px;
+  margin: 45px auto;
+  padding: 0 20px;
+}
+
+.panel {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin: 22px 0 9px;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #ccd1d6;
+  border-radius: 7px;
+  font: inherit;
+}
+
+textarea {
+  min-height: 280px;
+  resize: vertical;
+  line-height: 1.7;
+}
+
+button {
+  background: #101923;
+  color: white;
+  border: none;
+  padding: 14px 20px;
+  border-radius: 7px;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 15px 10px 0 0;
+}
+
+button:hover { background: #243a50; }
+
+button.gold {
+  background: #d8b46a;
+  color: #101923;
+}
+
+.preview {
+  display: none;
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  margin-top: 30px;
+  overflow-wrap: anywhere;
+}
+
+.preview h2 { font-size: 32px; }
+
+.preview .category {
+  color: #a17b35;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.preview img {
+  width: 100%;
+  max-height: 420px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.preview .body {
+  white-space: pre-wrap;
+  line-height: 1.8;
+  margin-top: 25px;
+}
+
+.info {
+  margin-top: 25px;
+  padding: 18px;
+  background: #f5f5f2;
+  border-left: 4px solid #d8b46a;
+  line-height: 1.6;
+}
+
+#status { color: #59636e; }
+
+footer {
+  background: #101923;
+  color: #c8cdd2;
+  padding: 35px 6%;
+  text-align: center;
+  margin-top: 65px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">90MINUTES<span>.</span></div>
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="actualites.html">Actualités</a>
+    <a href="analyses.html">Analyses tactiques</a>
+    <a href="decryptages.html">Décryptages</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>ESPACE <span>RÉDACTION.</span></h1>
+  <p>Écris et prépare les prochains articles de 90MINUTES.</p>
+</section>
+
+<main>
+
+  <section class="panel">
+    <h2>Nouvel article</h2>
+
+    <label for="titre">Titre de l'article</label>
+    <input id="titre" placeholder="Ex : PSG - Marseille : les clés du match">
+
+    <label for="categorie">Rubrique</label>
+    <select id="categorie">
+      <option value="Actualités">Actualités</option>
+      <option value="Analyses tactiques">Analyses tactiques</option>
+      <option value="Décryptages">Décryptages</option>
+    </select>
+
+    <label for="image">Image de couverture</label>
+    <input id="image" type="file" accept="image/*">
+
+    <label for="introduction">Introduction</label>
+    <textarea id="introduction" style="min-height:110px"
+      placeholder="Présente le sujet de ton article..."></textarea>
+
+    <label for="contenu">Contenu de l'article</label>
+    <textarea id="contenu"
+      placeholder="Rédige ton analyse, tes informations et ton verdict..."></textarea>
+
+    <button type="button" onclick="sauvegarder()">
+      Enregistrer le brouillon
+    </button>
+
+    <button type="button" class="gold" onclick="previsualiser()">
+      Prévisualiser
+    </button>
+
+    <button type="button" onclick="exporter()">
+      Télécharger l'article
+    </button>
+
+    <p id="status" role="status"></p>
+
+    <div class="info">
+      <strong>Version de préparation :</strong>
+      les brouillons sont enregistrés uniquement dans ce navigateur.
+      Le téléchargement crée un fichier texte, mais ne publie pas
+      encore l'article sur le site. Cette page n'est pas privée.
+    </div>
+  </section>
+
+  <section class="preview" id="preview">
+    <span class="category" id="pCategorie"></span>
+    <h2 id="pTitre"></h2>
+    <p id="pIntroduction"></p>
+    <img id="pImage" alt="Couverture de l'article" hidden>
+    <div class="body" id="pContenu"></div>
+  </section>
+
+</main>
+
+<footer>
+  © 2026 90MINUTES — LE FOOTBALL DÉCRYPTÉ
+</footer>
+
+<script>
+const champs = ["titre", "categorie", "introduction", "contenu"];
+
+function donnees() {
+  const article = {};
+  champs.forEach(id => {
+    article[id] = document.getElementById(id).value;
+  });
+  return article;
+}
+
+function message(texte) {
+  document.getElementById("status").textContent = texte;
+}
+
+function sauvegarder() {
+  try {
+    localStorage.setItem(
+      "90minutes_brouillon",
+      JSON.stringify(donnees())
+    );
+    message("Brouillon enregistré sur cet appareil.");
+  } catch (e) {
+    message("Impossible d'enregistrer le brouillon.");
+  }
+}
+
+function previsualiser() {
+  const article = donnees();
+
+  document.getElementById("pTitre").textContent =
+    article.titre || "Article sans titre";
+
+  document.getElementById("pCategorie").textContent =
+    article.categorie;
+
+  document.getElementById("pIntroduction").textContent =
+    article.introduction;
+
+  document.getElementById("pContenu").textContent =
+    article.contenu;
+
+  const fichier = document.getElementById("image").files[0];
+  const image = document.getElementById("pImage");
+
+  if (image.dataset.url) {
+    URL.revokeObjectURL(image.dataset.url);
+    delete image.dataset.url;
+  }
+
+  if (fichier) {
+    const url = URL.createObjectURL(fichier);
+    image.src = url;
+    image.dataset.url = url;
+    image.hidden = false;
+  } else {
+    image.removeAttribute("src");
+    image.hidden = true;
+  }
+
+  document.getElementById("preview").style.display = "block";
+  document.getElementById("preview").scrollIntoView({
+    behavior: "smooth"
+  });
+}
+
+function exporter() {
+  const article = donnees();
+
+  if (!article.titre.trim()) {
+    message("Ajoute un titre avant de télécharger.");
+    return;
+  }
+
+  const texte =
+    "90MINUTES\n\n" +
+    "Titre : " + article.titre + "\n" +
+    "Rubrique : " + article.categorie + "\n\n" +
+    "INTRODUCTION\n" + article.introduction + "\n\n" +
+    "ARTICLE\n" + article.contenu;
+
+  const fichier = new Blob([texte], {
+    type: "text/plain;charset=utf-8"
+  });
+
+  const url = URL.createObjectURL(fichier);
+  const lien = document.createElement("a");
+  lien.href = url;
+  lien.download = "article-90minutes.txt";
+  lien.click();
+
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+  message("Article téléchargé. Il n'est pas encore publié.");
+}
+
+try {
+  const brouillon = JSON.parse(
+    localStorage.getItem("90minutes_brouillon")
+  );
+
+  if (brouillon) {
+    champs.forEach(id => {
+      if (typeof brouillon[id] === "string") {
+        document.getElementById(id).value = brouillon[id];
+      }
+    });
+  }
+} catch (e) {
+  message("Impossible de récupérer l'ancien brouillon.");
+}
+</script>
+
+</body>
+</html>
