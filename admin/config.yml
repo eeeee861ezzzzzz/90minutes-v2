@@ -3,6 +3,8 @@ backend:
   name: github
   repo: eeeee861ezzzzzz/90minutes-v2
   branch: main
+  base_url: https://90minutes-auth.benhamouadam42.workers.dev
+  auth_endpoint: auth
 
 media_folder: "images"
 public_folder: "/90minutes-v2/images"
@@ -21,6 +23,7 @@ collections:
       - label: "Titre"
         name: "title"
         widget: "string"
+
       - label: "Rubrique"
         name: "category"
         widget: "select"
@@ -28,16 +31,20 @@ collections:
           - "Actualités"
           - "Analyses tactiques"
           - "Décryptages"
+
       - label: "Date"
         name: "date"
         widget: "datetime"
+
       - label: "Image de couverture"
         name: "image"
         widget: "image"
         required: false
+
       - label: "Introduction"
         name: "description"
         widget: "text"
+
       - label: "Contenu de l'article"
         name: "body"
         widget: "markdown"
