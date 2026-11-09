@@ -19,6 +19,7 @@ collections:
     slug: "{{slug}}"
     extension: "md"
     format: "frontmatter"
+
     fields:
       - label: "Titre"
         name: "title"
@@ -30,7 +31,33 @@ collections:
         options:
           - "Actualités"
           - "Analyses tactiques"
-          - "Décryptages"
+
+      - label: "Championnat"
+        name: "league"
+        widget: "select"
+        required: false
+        default: ""
+        options:
+          - label: "LaLiga"
+            value: "liga"
+
+          - label: "Premier League"
+            value: "premier-league"
+
+          - label: "Ligue 1"
+            value: "ligue-1"
+
+          - label: "Serie A"
+            value: "serie-a"
+
+          - label: "Bundesliga"
+            value: "bundesliga"
+
+          - label: "Ligue des champions"
+            value: "champions-league"
+
+          - label: "Autre compétition"
+            value: "autre"
 
       - label: "Date"
         name: "date"
