@@ -298,10 +298,12 @@
     }
 
     async function loadArticles() {
+
       const status = document.getElementById("status");
       const container = document.getElementById("articles");
 
       try {
+
         const response = await fetch(api);
 
         if (!response.ok) {
@@ -316,6 +318,7 @@
 
         const articles = await Promise.all(
           markdownFiles.map(async file => {
+
             const articleResponse = await fetch(file.download_url);
 
             if (!articleResponse.ok) {
@@ -332,13 +335,32 @@
               image: getField(markdown, "image"),
               slug: file.name.replace(/\.md$/, "")
             };
+
           })
         );
 
+        /* ACTUALITÉS DES 7 DERNIERS JOURS */
+
+        const now = new Date();
+        const sevenDays = 7 * 24 * 60 * 60 * 1000;
+
         const actualites = articles
-          .filter(article =>
-            article.category === "Actualités"
-          )
+          .filter(article => {
+
+            if (article.category !== "Actualités") {
+              return false;
+            }
+
+            const published = new Date(article.date);
+            const age = now - published;
+
+            return (
+              !Number.isNaN(published.getTime()) &&
+              age >= 0 &&
+              age <= sevenDays
+            );
+
+          })
           .sort((a, b) =>
             new Date(b.date) - new Date(a.date)
           );
@@ -346,12 +368,15 @@
         status.textContent = "";
 
         if (actualites.length === 0) {
+
           status.textContent =
-            "Aucune actualité publiée pour le moment.";
+            "Aucune nouvelle actualité ces 7 derniers jours. Retrouvez nos anciennes publications dans les championnats.";
+
           return;
         }
 
         actualites.forEach(article => {
+
           const card = document.createElement("article");
           card.className = "article";
 
@@ -397,13 +422,16 @@
           `;
 
           container.appendChild(card);
+
         });
 
       } catch (error) {
+
         console.error(error);
 
         status.textContent =
           "Impossible de charger les actualités pour le moment.";
+
       }
     }
 
