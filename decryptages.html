@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Décryptages | 90MINUTES</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f5f2;
+      color: #101923;
+    }
+    header {
+      background: #101923;
+      color: white;
+      padding: 25px 6%;
+      border-bottom: 4px solid #d8b46a;
+    }
+    .logo {
+      font-size: 32px;
+      font-weight: 900;
+    }
+    .logo span { color: #d8b46a; }
+    nav {
+      display: flex;
+      gap: 25px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover, nav .active {
+      color: #d8b46a;
+    }
+    .hero {
+      background: #172635;
+      color: white;
+      text-align: center;
+      padding: 75px 6%;
+    }
+    .hero h1 {
+      font-size: clamp(35px, 6vw, 60px);
+      margin: 0;
+    }
+    .hero span { color: #d8b46a; }
+    .hero p {
+      color: #c8cdd2;
+      font-size: 18px;
+      line-height: 1.7;
+    }
+    main {
+      max-width: 1200px;
+      margin: 50px auto;
+      padding: 0 20px;
+    }
+    h2 {
+      border-left: 5px solid #d8b46a;
+      padding-left: 15px;
+      margin-bottom: 25px;
+    }
+    .articles {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 25px;
+    }
+    .card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+    }
+    .visual {
+      background: #172635;
+      height: 180px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 48px;
+    }
+    .content { padding: 25px; }
+    .category {
+      color: #a17b35;
+      font-size: 13px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    .card h3 {
+      font-size: 22px;
+      line-height: 1.4;
+    }
+    .card p {
+      color: #59636e;
+      line-height: 1.7;
+    }
+    .notice {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      margin-top: 35px;
+      text-align: center;
+    }
+    footer {
+      background: #101923;
+      color: #c8cdd2;
+      text-align: center;
+      padding: 35px 6%;
+      margin-top: 70px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">90MINUTES<span>.</span></div>
+  <nav>
+    <a href="index.html">Accueil</a>
+    <a href="actualites.html">Actualités</a>
+    <a href="analyses.html">Analyses tactiques</a>
+    <a href="decryptages.html" class="active">Décryptages</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>AU-DELÀ DU <span>RÉSULTAT.</span></h1>
+  <p>
+    Les décisions, les joueurs et les moments qui
+    changent le cours d'un match.
+  </p>
+</section>
+
+<main>
+  <h2>NOS DÉCRYPTAGES</h2>
+
+  <div class="articles">
+    <article class="card">
+      <div class="visual">🔎</div>
+      <div class="content">
+        <span class="category">Décryptage</span>
+        <h3>Les tournants d'un match</h3>
+        <p>
+          Comprendre les actions et les décisions
+          qui ont fait basculer une rencontre.
+        </p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="visual">🧠</div>
+      <div class="content">
+        <span class="category">Stratégie</span>
+        <h3>Les choix des entraîneurs</h3>
+        <p>
+          Changements, adaptations et décisions
+          tactiques qui influencent le résultat.
+        </p>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="visual">⭐</div>
+      <div class="content">
+        <span class="category">Joueurs</span>
+        <h3>Les performances individuelles</h3>
+        <p>
+          Analyser l'influence des joueurs
+          au-delà des buts et des passes décisives.
+        </p>
+      </div>
+    </article>
+  </div>
+
+  <div class="notice">
+    <h3>Les décryptages arrivent bientôt</h3>
+    <p>
+      Retrouve prochainement les articles
+      exclusifs de la rédaction 90MINUTES.
+    </p>
+  </div>
+</main>
+
+<footer>
+  © 2026 90MINUTES — LE FOOTBALL DÉCRYPTÉ
+</footer>
+
+</body>
+</html>
