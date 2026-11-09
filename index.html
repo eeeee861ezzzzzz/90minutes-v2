@@ -19,16 +19,22 @@ body {
 header {
   background: #101923;
   color: white;
-  padding: 25px 6%;
+  padding: 18px 6%;
   border-bottom: 4px solid #d8b46a;
 }
 
-.logo {
-  font-size: 32px;
-  font-weight: 900;
+.logo-link {
+  display: inline-block;
+  text-decoration: none;
 }
 
-.logo span { color: #d8b46a; }
+.logo-img {
+  display: block;
+  width: 190px;
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
 
 nav {
   display: flex;
@@ -115,9 +121,7 @@ main {
   object-fit: cover;
 }
 
-.article-content {
-  padding: 25px;
-}
+.article-content { padding: 25px; }
 
 .category {
   color: #a17b35;
@@ -162,13 +166,9 @@ footer {
 }
 
 @media (max-width: 600px) {
-  .hero {
-    padding: 65px 6%;
-  }
-
-  .section-title {
-    font-size: 24px;
-  }
+  .hero { padding: 65px 6%; }
+  .section-title { font-size: 24px; }
+  .logo-img { width: 155px; }
 }
 </style>
 </head>
@@ -176,7 +176,13 @@ footer {
 <body>
 
 <header>
-  <div class="logo">90MINUTES<span>.</span></div>
+  <a class="logo-link" href="index.html">
+    <img
+      class="logo-img"
+      src="Capture%20d%27%C3%A9cran%202026-11-09%20153748.png"
+      alt="90MINUTES - Le football décrypté"
+    >
+  </a>
 
   <nav>
     <a href="index.html" class="active">Accueil</a>
@@ -197,9 +203,6 @@ footer {
 </section>
 
 <main>
-
-  <!-- DERNIERS ARTICLES -->
-
   <h2 class="section-title">DERNIÈRES PUBLICATIONS</h2>
 
   <p id="status" class="status">
@@ -208,12 +211,9 @@ footer {
 
   <div id="latest-articles" class="articles"></div>
 
-  <!-- RUBRIQUES -->
-
   <h2 class="section-title">DÉCOUVRIR 90MINUTES</h2>
 
   <div class="articles">
-
     <article class="article">
       <div class="article-image">⚽</div>
       <div class="article-content">
@@ -223,9 +223,7 @@ footer {
           Transferts, championnats, compétitions
           et informations du football mondial.
         </p>
-        <a href="actualites.html">
-          Découvrir les actualités →
-        </a>
+        <a href="actualites.html">Découvrir les actualités →</a>
       </div>
     </article>
 
@@ -238,9 +236,7 @@ footer {
           Systèmes de jeu, pressing, transitions
           et stratégies des entraîneurs.
         </p>
-        <a href="analyses.html">
-          Découvrir les analyses →
-        </a>
+        <a href="analyses.html">Découvrir les analyses →</a>
       </div>
     </article>
 
@@ -253,14 +249,10 @@ footer {
           Comprendre les décisions et les moments
           qui changent le cours d'un match.
         </p>
-        <a href="decryptages.html">
-          Découvrir les décryptages →
-        </a>
+        <a href="decryptages.html">Découvrir les décryptages →</a>
       </div>
     </article>
-
   </div>
-
 </main>
 
 <footer>
@@ -269,9 +261,7 @@ footer {
 
 <script>
 const REPO = "eeeee861ezzzzzz/90minutes-v2";
-
-const API =
-  `https://api.github.com/repos/${REPO}/contents/publications`;
+const API = `https://api.github.com/repos/${REPO}/contents/publications`;
 
 function escapeHTML(value) {
   return String(value ?? "").replace(/[&<>"']/g, char => ({
@@ -290,9 +280,7 @@ function getField(markdown, name) {
 
   if (!match) return "";
 
-  return match[1]
-    .trim()
-    .replace(/^["']|["']$/g, "");
+  return match[1].trim().replace(/^["']|["']$/g, "");
 }
 
 function imageURL(image) {
@@ -352,7 +340,6 @@ async function loadLatestArticles() {
     );
 
     const latest = articles.slice(0, 3);
-
     status.textContent = "";
 
     if (latest.length === 0) {
@@ -377,9 +364,7 @@ async function loadLatestArticles() {
         encodeURIComponent(article.slug);
 
       card.innerHTML = `
-        <div class="article-image">
-          ${imageHTML}
-        </div>
+        <div class="article-image">${imageHTML}</div>
 
         <div class="article-content">
           <span class="category">
