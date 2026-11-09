@@ -1,0 +1,335 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actualités | 90MINUTES</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #f5f5f2;
+      color: #101923;
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      background: #101923;
+      color: white;
+      padding: 25px 6%;
+      border-bottom: 4px solid #d8b46a;
+    }
+
+    .logo {
+      font-size: 32px;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    .logo span {
+      color: #d8b46a;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 25px;
+      margin-top: 20px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: #d8b46a;
+    }
+
+    .hero {
+      background: #172635;
+      color: white;
+      padding: 65px 6%;
+    }
+
+    .hero h1 {
+      font-size: clamp(34px, 6vw, 55px);
+      margin: 0 0 15px;
+    }
+
+    .hero h1 span {
+      color: #d8b46a;
+    }
+
+    .hero p {
+      color: #c8cdd2;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 45px auto;
+      padding: 0 20px;
+    }
+
+    .section-title {
+      border-left: 5px solid #d8b46a;
+      padding-left: 15px;
+      font-size: 27px;
+      margin-bottom: 25px;
+    }
+
+    .categories {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 35px;
+    }
+
+    .categories button {
+      border: 1px solid #d8b46a;
+      background: white;
+      color: #101923;
+      padding: 12px 18px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .categories button.active {
+      background: #101923;
+      color: #d8b46a;
+    }
+
+    .articles {
+      display: grid;
+      grid-template-columns:
+        repeat(auto-fit, minmax(260px, 1fr));
+      gap: 25px;
+    }
+
+    .article {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+    }
+
+    .article-image {
+      height: 170px;
+      background: #172635;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 42px;
+      color: #d8b46a;
+    }
+
+    .article-content {
+      padding: 25px;
+    }
+
+    .category {
+      color: #a17b35;
+      text-transform: uppercase;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .article h3 {
+      font-size: 21px;
+      line-height: 1.4;
+    }
+
+    .article p {
+      color: #59636e;
+      line-height: 1.6;
+    }
+
+    .empty {
+      padding: 40px 25px;
+      background: white;
+      border: 1px solid #e1e3e5;
+      border-radius: 12px;
+      color: #59636e;
+      text-align: center;
+    }
+
+    footer {
+      margin-top: 70px;
+      background: #101923;
+      color: #c8cdd2;
+      padding: 35px 6%;
+      text-align: center;
+    }
+
+    @media (max-width: 650px) {
+      nav { gap: 15px; }
+      .hero { padding: 45px 6%; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">
+      90MINUTES<span>.</span>
+    </div>
+
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="actualites.html" class="active">Actualités</a>
+      <a href="index.html#analyses">Analyses tactiques</a>
+      <a href="index.html#decryptages">Décryptages</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>TOUTE L'<span>ACTUALITÉ.</span></h1>
+    <p>
+      Transferts, compétitions, clubs et football mondial.
+      <br>
+      Retrouvez l'actualité décryptée par 90MINUTES.
+    </p>
+  </section>
+
+  <main>
+
+    <h2 class="section-title">LES ACTUALITÉS</h2>
+
+    <div class="categories">
+      <button class="active" data-filter="tous">
+        Toutes
+      </button>
+
+      <button data-filter="transferts">
+        Transferts
+      </button>
+
+      <button data-filter="competitions">
+        Compétitions
+      </button>
+
+      <button data-filter="clubs">
+        Clubs
+      </button>
+
+      <button data-filter="international">
+        International
+      </button>
+    </div>
+
+    <div class="articles" id="articles">
+
+      <article class="article" data-category="clubs">
+        <div class="article-image">⚽</div>
+
+        <div class="article-content">
+          <span class="category">Le média</span>
+          <h3>Bienvenue dans l'actualité 90MINUTES</h3>
+          <p>
+            Cette rubrique accueillera prochainement
+            les articles et informations du football mondial.
+          </p>
+        </div>
+      </article>
+
+      <article class="article" data-category="transferts">
+        <div class="article-image">📰</div>
+
+        <div class="article-content">
+          <span class="category">Transferts</span>
+          <h3>Le mercato sous tous ses angles</h3>
+          <p>
+            Retrouvez prochainement les mouvements
+            officiels et les analyses des transferts.
+          </p>
+        </div>
+      </article>
+
+      <article class="article" data-category="competitions">
+        <div class="article-image">🏆</div>
+
+        <div class="article-content">
+          <span class="category">Compétitions</span>
+          <h3>Les grandes compétitions</h3>
+          <p>
+            Championnats, coupes européennes
+            et rendez-vous majeurs du football.
+          </p>
+        </div>
+      </article>
+
+      <article class="article" data-category="international">
+        <div class="article-image">🌍</div>
+
+        <div class="article-content">
+          <span class="category">International</span>
+          <h3>Le football sans frontières</h3>
+          <p>
+            Sélections nationales, compétitions
+            internationales et football mondial.
+          </p>
+        </div>
+      </article>
+
+    </div>
+
+    <p class="empty" id="empty" hidden>
+      Aucun article dans cette catégorie pour le moment.
+    </p>
+
+  </main>
+
+  <footer>
+    © 2026 90MINUTES — LE FOOTBALL DÉCRYPTÉ
+  </footer>
+
+  <script>
+    const boutons = document.querySelectorAll(
+      ".categories button"
+    );
+
+    const articles = document.querySelectorAll(
+      ".article"
+    );
+
+    const messageVide = document.getElementById("empty");
+
+    boutons.forEach(bouton => {
+      bouton.addEventListener("click", () => {
+        const filtre = bouton.dataset.filter;
+        let visibles = 0;
+
+        boutons.forEach(b => {
+          b.classList.remove("active");
+        });
+
+        bouton.classList.add("active");
+
+        articles.forEach(article => {
+          const afficher =
+            filtre === "tous" ||
+            article.dataset.category === filtre;
+
+          article.hidden = !afficher;
+
+          if (afficher) visibles++;
+        });
+
+        messageVide.hidden = visibles > 0;
+      });
+    });
+  </script>
+
+</body>
+</html>
