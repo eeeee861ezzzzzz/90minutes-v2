@@ -241,7 +241,7 @@ footer {
   <nav>
     <a href="index.html" class="active">Accueil</a>
     <a href="actualites.html">Actualités</a>
-    <a href="analyses.html">Analyses tactiques</a>
+    <a href="analyses.html">Résumés de matchs</a>
     <a href="championnats.html">Championnats</a>
   </nav>
 
@@ -256,7 +256,7 @@ footer {
   </h1>
 
   <p>
-    Actualités et analyses tactiques.
+    Actualités et résumés de matchs.
     <br>
     Une autre manière de comprendre le football.
   </p>
@@ -314,17 +314,17 @@ footer {
 
       <div class="article-content">
 
-        <span class="category">Analyse tactique</span>
+        <span class="category">Résumés de matchs</span>
 
-        <h3>Comprendre le jeu autrement</h3>
+        <h3>Revivez les matchs</h3>
 
         <p>
-          Systèmes de jeu, pressing, transitions
-          et stratégies des entraîneurs.
+          Scores, buts, temps forts et moments
+          décisifs des rencontres de football.
         </p>
 
         <a href="analyses.html">
-          Découvrir les analyses →
+          Découvrir les résumés →
         </a>
 
       </div>
@@ -505,6 +505,11 @@ async function loadLatestArticles() {
         "article.html?slug=" +
         encodeURIComponent(article.slug);
 
+      const displayedCategory =
+        article.category === "Analyses tactiques"
+          ? "Résumés de matchs"
+          : article.category;
+
       card.innerHTML = `
 
         <div class="article-image">
@@ -514,7 +519,7 @@ async function loadLatestArticles() {
         <div class="article-content">
 
           <span class="category">
-            ${escapeHTML(article.category)}
+            ${escapeHTML(displayedCategory)}
           </span>
 
           <h3>
