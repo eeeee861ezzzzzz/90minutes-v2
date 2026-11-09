@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Espace rédaction | 90MINUTES</title>
+
 <style>
 * { box-sizing: border-box; }
 
@@ -31,8 +32,8 @@ header {
 
 nav {
   display: flex;
-  gap: 25px;
   flex-wrap: wrap;
+  gap: 25px;
   margin-top: 20px;
 }
 
@@ -47,8 +48,8 @@ nav a:hover { color: #d8b46a; }
 .hero {
   background: #172635;
   color: white;
-  text-align: center;
   padding: 55px 6%;
+  text-align: center;
 }
 
 .hero h1 {
@@ -69,7 +70,7 @@ main {
   padding: 0 20px;
 }
 
-.panel {
+.panel, .preview {
   background: white;
   padding: 30px;
   border-radius: 12px;
@@ -116,16 +117,13 @@ button.gold {
 
 .preview {
   display: none;
-  background: white;
-  padding: 30px;
-  border-radius: 12px;
   margin-top: 30px;
   overflow-wrap: anywhere;
 }
 
 .preview h2 { font-size: 32px; }
 
-.preview .category {
+.category {
   color: #a17b35;
   font-weight: bold;
   text-transform: uppercase;
@@ -139,27 +137,41 @@ button.gold {
   margin-top: 20px;
 }
 
-.preview .body {
+.article-body {
   white-space: pre-wrap;
   line-height: 1.8;
   margin-top: 25px;
 }
 
 .info {
-  margin-top: 25px;
-  padding: 18px;
   background: #f5f5f2;
   border-left: 4px solid #d8b46a;
-  line-height: 1.6;
+  padding: 18px;
+  margin-top: 25px;
+  line-height: 1.7;
 }
 
-#status { color: #59636e; }
+#publication {
+  display: none;
+  margin-top: 25px;
+}
+
+#codeArticle {
+  min-height: 180px;
+  font-family: monospace;
+  font-size: 13px;
+}
+
+#status {
+  color: #59636e;
+  line-height: 1.6;
+}
 
 footer {
   background: #101923;
   color: #c8cdd2;
-  padding: 35px 6%;
   text-align: center;
+  padding: 35px 6%;
   margin-top: 65px;
 }
 </style>
@@ -179,64 +191,95 @@ footer {
 
 <section class="hero">
   <h1>ESPACE <span>RÉDACTION.</span></h1>
-  <p>Écris et prépare les prochains articles de 90MINUTES.</p>
+  <p>Rédige, prévisualise et prépare tes articles.</p>
 </section>
 
 <main>
 
-  <section class="panel">
-    <h2>Nouvel article</h2>
+<section class="panel">
 
-    <label for="titre">Titre de l'article</label>
-    <input id="titre" placeholder="Ex : PSG - Marseille : les clés du match">
+  <h2>Nouvel article</h2>
 
-    <label for="categorie">Rubrique</label>
-    <select id="categorie">
-      <option value="Actualités">Actualités</option>
-      <option value="Analyses tactiques">Analyses tactiques</option>
-      <option value="Décryptages">Décryptages</option>
-    </select>
+  <label for="titre">Titre de l'article</label>
+  <input id="titre"
+    placeholder="Ex : PSG - Real Madrid : les clés du match">
 
-    <label for="image">Image de couverture</label>
-    <input id="image" type="file" accept="image/*">
+  <label for="categorie">Rubrique</label>
+  <select id="categorie">
+    <option value="Actualités">Actualités</option>
+    <option value="Analyses tactiques">Analyses tactiques</option>
+    <option value="Décryptages">Décryptages</option>
+  </select>
 
-    <label for="introduction">Introduction</label>
-    <textarea id="introduction" style="min-height:110px"
-      placeholder="Présente le sujet de ton article..."></textarea>
+  <label for="image">Image de couverture</label>
+  <input id="image" type="file" accept="image/*">
 
-    <label for="contenu">Contenu de l'article</label>
-    <textarea id="contenu"
-      placeholder="Rédige ton analyse, tes informations et ton verdict..."></textarea>
+  <label for="introduction">Introduction</label>
+  <textarea id="introduction"
+    style="min-height:110px"
+    placeholder="Présente ton sujet..."></textarea>
 
-    <button type="button" onclick="sauvegarder()">
-      Enregistrer le brouillon
+  <label for="contenu">Contenu de l'article</label>
+  <textarea id="contenu"
+    placeholder="Écris ton article ici..."></textarea>
+
+  <button type="button" onclick="sauvegarder()">
+    Enregistrer le brouillon
+  </button>
+
+  <button type="button" onclick="previsualiser()">
+    Prévisualiser
+  </button>
+
+  <button type="button" class="gold"
+    onclick="preparerPublication()">
+    Préparer la publication
+  </button>
+
+  <p id="status" role="status"></p>
+
+  <div class="info">
+    <strong>Important :</strong>
+    cette page est publique. Les brouillons restent
+    uniquement dans ce navigateur.
+    Le bouton de préparation ne publie pas encore
+    l'article. Seul un compte ayant accès au dépôt
+    GitHub pourra modifier les articles publiés.
+    L'image sélectionnée sert à la prévisualisation :
+    elle n'est pas encore envoyée sur le site.
+  </div>
+
+  <div id="publication">
+    <h3>Article prêt pour GitHub</h3>
+
+    <p>
+      Copie ce bloc pour l'ajouter dans
+      <strong>articles.json</strong>.
+    </p>
+
+    <textarea id="codeArticle" readonly></textarea>
+
+    <button type="button" onclick="copierArticle()">
+      Copier l'article
     </button>
 
-    <button type="button" class="gold" onclick="previsualiser()">
-      Prévisualiser
-    </button>
+    <p>
+      <a href="https://github.com/eeeee861ezzzzzz/90minutes-v2/blob/main/articles.json"
+         target="_blank" rel="noopener noreferrer">
+        Ouvrir articles.json sur GitHub
+      </a>
+    </p>
+  </div>
 
-    <button type="button" onclick="exporter()">
-      Télécharger l'article
-    </button>
+</section>
 
-    <p id="status" role="status"></p>
-
-    <div class="info">
-      <strong>Version de préparation :</strong>
-      les brouillons sont enregistrés uniquement dans ce navigateur.
-      Le téléchargement crée un fichier texte, mais ne publie pas
-      encore l'article sur le site. Cette page n'est pas privée.
-    </div>
-  </section>
-
-  <section class="preview" id="preview">
-    <span class="category" id="pCategorie"></span>
-    <h2 id="pTitre"></h2>
-    <p id="pIntroduction"></p>
-    <img id="pImage" alt="Couverture de l'article" hidden>
-    <div class="body" id="pContenu"></div>
-  </section>
+<section class="preview" id="preview">
+  <span class="category" id="pCategorie"></span>
+  <h2 id="pTitre"></h2>
+  <p id="pIntroduction"></p>
+  <img id="pImage" alt="Couverture" hidden>
+  <div class="article-body" id="pContenu"></div>
+</section>
 
 </main>
 
@@ -245,13 +288,20 @@ footer {
 </footer>
 
 <script>
-const champs = ["titre", "categorie", "introduction", "contenu"];
+const champs = [
+  "titre",
+  "categorie",
+  "introduction",
+  "contenu"
+];
 
 function donnees() {
   const article = {};
+
   champs.forEach(id => {
     article[id] = document.getElementById(id).value;
   });
+
   return article;
 }
 
@@ -265,8 +315,9 @@ function sauvegarder() {
       "90minutes_brouillon",
       JSON.stringify(donnees())
     );
+
     message("Brouillon enregistré sur cet appareil.");
-  } catch (e) {
+  } catch (erreur) {
     message("Impossible d'enregistrer le brouillon.");
   }
 }
@@ -310,33 +361,47 @@ function previsualiser() {
   });
 }
 
-function exporter() {
+function preparerPublication() {
   const article = donnees();
 
-  if (!article.titre.trim()) {
-    message("Ajoute un titre avant de télécharger.");
+  if (!article.titre.trim() ||
+      !article.contenu.trim()) {
+    message("Ajoute un titre et du contenu.");
     return;
   }
 
-  const texte =
-    "90MINUTES\n\n" +
-    "Titre : " + article.titre + "\n" +
-    "Rubrique : " + article.categorie + "\n\n" +
-    "INTRODUCTION\n" + article.introduction + "\n\n" +
-    "ARTICLE\n" + article.contenu;
+  const publication = {
+    titre: article.titre,
+    categorie: article.categorie,
+    introduction: article.introduction,
+    contenu: article.contenu
+  };
 
-  const fichier = new Blob([texte], {
-    type: "text/plain;charset=utf-8"
+  document.getElementById("codeArticle").value =
+    JSON.stringify(publication, null, 2);
+
+  document.getElementById("publication").style.display =
+    "block";
+
+  message("Article préparé. Il n'est pas encore publié.");
+
+  document.getElementById("publication").scrollIntoView({
+    behavior: "smooth"
   });
+}
 
-  const url = URL.createObjectURL(fichier);
-  const lien = document.createElement("a");
-  lien.href = url;
-  lien.download = "article-90minutes.txt";
-  lien.click();
+async function copierArticle() {
+  const texte = document.getElementById("codeArticle").value;
 
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
-  message("Article téléchargé. Il n'est pas encore publié.");
+  try {
+    await navigator.clipboard.writeText(texte);
+    message("Article copié !");
+  } catch (erreur) {
+    const zone = document.getElementById("codeArticle");
+    zone.focus();
+    zone.select();
+    message("Sélectionne le texte puis appuie sur Ctrl+C.");
+  }
 }
 
 try {
@@ -351,8 +416,8 @@ try {
       }
     });
   }
-} catch (e) {
-  message("Impossible de récupérer l'ancien brouillon.");
+} catch (erreur) {
+  message("Impossible de récupérer le brouillon.");
 }
 </script>
 
