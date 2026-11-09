@@ -5,58 +5,163 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Actualités | 90MINUTES</title>
+
   <style>
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       background: #101923;
-      color: #fff;
+      color: white;
       font-family: Arial, sans-serif;
     }
+
     header {
       background: #172635;
       padding: 24px 7%;
       border-bottom: 2px solid #d8b46a;
     }
+
     .logo {
       color: #d8b46a;
       font-size: 28px;
       font-weight: bold;
       text-decoration: none;
     }
+
     nav {
       display: flex;
       flex-wrap: wrap;
       gap: 22px;
       margin-top: 18px;
     }
-    nav a { color: white; text-decoration: none; }
-    nav a:hover { color: #d8b46a; }
-    main { max-width: 1100px; margin: 45px auto; padding: 0 22px; }
-    h1 { color: #d8b46a; }
-    .subtitle { color: #bac6d0; }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      color: #d8b46a;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 45px auto;
+      padding: 0 22px;
+    }
+
+    h1 {
+      color: #d8b46a;
+      font-size: 42px;
+      margin-bottom: 20px;
+    }
+
+    .subtitle {
+      color: #bac6d0;
+      font-size: 18px;
+    }
+
     .articles {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
       gap: 24px;
       margin-top: 35px;
     }
+
     .article {
       background: #172635;
       border: 1px solid #304456;
       border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .article:hover {
+      transform: translateY(-4px);
+      border-color: #d8b46a;
+    }
+
+    .article-image {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .article-body {
       padding: 24px;
     }
-    .article h2 { margin-top: 0; font-size: 21px; }
-    .article p { color: #c8d0d9; line-height: 1.6; }
-    .article .category { color: #d8b46a; font-size: 13px; }
-    .article a { color: #d8b46a; }
-    .status { color: #bac6d0; margin-top: 30px; }
+
+    .category {
+      color: #d8b46a;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .article h2 {
+      font-size: 23px;
+      margin: 12px 0;
+      line-height: 1.3;
+    }
+
+    .article p {
+      color: #c8d0d9;
+      line-height: 1.6;
+    }
+
+    .date {
+      font-size: 14px;
+      color: #aebdca;
+    }
+
+    .read-more {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 12px 18px;
+      background: #d8b46a;
+      color: #101923;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+
+    .read-more:hover {
+      background: #f0cd85;
+    }
+
+    .status {
+      color: #bac6d0;
+      margin-top: 30px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 35px 20px;
+      color: #aebdca;
+      border-top: 1px solid #304456;
+      margin-top: 70px;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 32px;
+      }
+
+      .articles {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
+
 <body>
+
   <header>
     <a class="logo" href="index.html">90MINUTES</a>
+
     <nav>
       <a href="index.html">Accueil</a>
       <a href="actualites.html">Actualités</a>
@@ -67,15 +172,27 @@
 
   <main>
     <h1>Actualités</h1>
-    <p class="subtitle">Le football décrypté, toute l'actualité.</p>
 
-    <p id="status" class="status">Chargement des articles...</p>
+    <p class="subtitle">
+      Le football décrypté, toute l'actualité.
+    </p>
+
+    <p id="status" class="status">
+      Chargement des articles...
+    </p>
+
     <div id="articles" class="articles"></div>
   </main>
 
+  <footer>
+    © 2026 90MINUTES — LE FOOTBALL DÉCRYPTÉ
+  </footer>
+
   <script>
     const repo = "eeeee861ezzzzzz/90minutes-v2";
-    const api = `https://api.github.com/repos/${repo}/contents/publications`;
+
+    const api =
+      `https://api.github.com/repos/${repo}/contents/publications`;
 
     function escapeHTML(value) {
       return String(value ?? "").replace(/[&<>"']/g, char => ({
@@ -91,8 +208,26 @@
       const match = markdown.match(
         new RegExp("^" + name + ":\\s*(.*)$", "m")
       );
+
       if (!match) return "";
-      return match[1].trim().replace(/^["']|["']$/g, "");
+
+      return match[1]
+        .trim()
+        .replace(/^["']|["']$/g, "");
+    }
+
+    function imageURL(image) {
+      if (!image) return "";
+
+      if (image.startsWith("https://")) {
+        return image;
+      }
+
+      if (image.startsWith("/")) {
+        return image;
+      }
+
+      return "/90minutes-v2/" + image.replace(/^\/+/, "");
     }
 
     async function loadArticles() {
@@ -101,57 +236,106 @@
 
       try {
         const response = await fetch(api);
-        if (!response.ok) throw new Error("Impossible de lire les publications");
+
+        if (!response.ok) {
+          throw new Error("Impossible de lire les publications");
+        }
 
         const files = await response.json();
-        const markdownFiles = files.filter(file => file.name.endsWith(".md"));
 
-        const articles = await Promise.all(markdownFiles.map(async file => {
-          const response = await fetch(file.download_url);
-          if (!response.ok) throw new Error("Article inaccessible");
-          const markdown = await response.text();
+        const markdownFiles = files.filter(file =>
+          file.name.endsWith(".md")
+        );
 
-          return {
-            title: getField(markdown, "title"),
-            category: getField(markdown, "category"),
-            date: getField(markdown, "date"),
-            description: getField(markdown, "description"),
-            url: file.html_url
-          };
-        }));
+        const articles = await Promise.all(
+          markdownFiles.map(async file => {
+            const articleResponse = await fetch(file.download_url);
+
+            if (!articleResponse.ok) {
+              throw new Error("Article inaccessible");
+            }
+
+            const markdown = await articleResponse.text();
+
+            return {
+              title: getField(markdown, "title"),
+              category: getField(markdown, "category"),
+              date: getField(markdown, "date"),
+              description: getField(markdown, "description"),
+              image: getField(markdown, "image"),
+              slug: file.name.replace(/\.md$/, "")
+            };
+          })
+        );
 
         const actualites = articles
-          .filter(article => article.category === "Actualités")
-          .sort((a, b) => new Date(b.date) - new Date(a.date));
+          .filter(article =>
+            article.category === "Actualités"
+          )
+          .sort((a, b) =>
+            new Date(b.date) - new Date(a.date)
+          );
 
         status.textContent = "";
 
         if (actualites.length === 0) {
-          status.textContent = "Aucune actualité publiée pour le moment.";
+          status.textContent =
+            "Aucune actualité publiée pour le moment.";
           return;
         }
 
         actualites.forEach(article => {
           const card = document.createElement("article");
           card.className = "article";
+
+          const image = imageURL(article.image);
+
+          const imageHTML = image
+            ? `<img class="article-image"
+                    src="${escapeHTML(image)}"
+                    alt="${escapeHTML(article.title)}">`
+            : "";
+
+          const link =
+            "article.html?slug=" +
+            encodeURIComponent(article.slug);
+
           card.innerHTML = `
-            <span class="category">${escapeHTML(article.category)}</span>
-            <h2>${escapeHTML(article.title)}</h2>
-            <p>${escapeHTML(article.description)}</p>
-            <p>${escapeHTML(article.date.slice(0, 10))}</p>
-            <a href="${escapeHTML(article.url)}" target="_blank" rel="noopener noreferrer">
-              Voir le fichier publié
-            </a>
+            ${imageHTML}
+
+            <div class="article-body">
+              <span class="category">
+                ${escapeHTML(article.category)}
+              </span>
+
+              <h2>${escapeHTML(article.title)}</h2>
+
+              <p>${escapeHTML(article.description)}</p>
+
+              <p class="date">
+                ${escapeHTML(article.date.slice(0, 10))}
+              </p>
+
+              <a class="read-more"
+                 href="${escapeHTML(link)}">
+                Lire l'article
+              </a>
+            </div>
           `;
+
           container.appendChild(card);
         });
+
       } catch (error) {
-        status.textContent = "Impossible de charger les actualités pour le moment.";
         console.error(error);
+
+        status.textContent =
+          "Impossible de charger les actualités pour le moment.";
       }
     }
 
     loadArticles();
   </script>
+
 </body>
 </html>
