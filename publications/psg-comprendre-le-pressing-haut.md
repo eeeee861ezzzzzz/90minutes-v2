@@ -1,5 +1,5 @@
 ---
-title: "PSG : comprendre le pressing haut"
+title: "PSG vs LYON "
 category: Analyses tactiques
 league: ligue-1
 date: 2026-11-09T17:11:00.000+01:00
