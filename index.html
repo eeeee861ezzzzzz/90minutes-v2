@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -123,12 +122,14 @@ main {
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 5px 20px rgba(0,0,0,0.06);
-  transition: transform 0.2s;
+  transition: transform 180ms ease;
   min-width: 0;
 }
 
+@media (hover: hover) and (pointer: fine) {
 .article:hover {
   transform: translateY(-4px);
+}
 }
 
 .article-image {
@@ -142,6 +143,7 @@ main {
 }
 
 .article-image img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -185,6 +187,50 @@ main {
 .status {
   color: #59636e;
   margin: 20px 0;
+}
+
+/* Interactions sans modifier la mise en page. */
+nav a,
+.article a {
+  transition: color 160ms ease, border-color 160ms ease;
+  touch-action: manipulation;
+}
+
+a:focus-visible {
+  outline: 2px solid #d8b46a;
+  outline-offset: 4px;
+}
+
+/* Réserve une première rangée pendant la récupération des publications. */
+#latest-articles[aria-busy="true"] {
+  min-height: 440px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  .article.is-revealing {
+    animation: article-appear 280ms ease-out both;
+  }
+
+  @keyframes article-appear {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  nav a,
+  .article,
+  .article a {
+    transition: none;
+  }
+
+  .article:hover {
+    transform: none;
+  }
 }
 
 /* PIED DE PAGE */
@@ -246,7 +292,7 @@ footer {
     align-items: center;
     justify-content: center;
     text-align: center;
-    min-height: 42px;
+    min-height: 44px;
     padding: 9px 6px;
     font-size: 13px;
     line-height: 1.35;
@@ -349,6 +395,9 @@ footer {
       class="logo-img"
       src="Ic%C3%B4ne%20%C2%AB%2090%20%C2%BB%20avec%20ballon%20et%20swoosh%20dor%C3%A9.png"
       alt="Logo 90MINUTES"
+      width="65"
+      height="65"
+      decoding="async"
     >
 
     <span class="logo-text">
@@ -356,8 +405,8 @@ footer {
     </span>
   </a>
 
-  <nav>
-    <a href="index.html" class="active">Accueil</a>
+  <nav aria-label="Navigation principale">
+    <a href="index.html" class="active" aria-current="page">Accueil</a>
     <a href="actualites.html">Actualités</a>
     <a href="analyses.html">Résumés de matchs</a>
     <a href="championnats.html">Championnats</a>
@@ -386,11 +435,12 @@ footer {
     DERNIÈRES PUBLICATIONS
   </h2>
 
-  <p id="status" class="status">
+  <p id="status" class="status" role="status">
     Chargement des derniers articles...
   </p>
 
-  <div id="latest-articles" class="articles"></div>
+  <div id="latest-articles" class="articles" aria-busy="true"></div>
+  <noscript><p>Activez JavaScript pour afficher les dernières publications. Les rubriques ci-dessous restent accessibles.</p></noscript>
 
   <!-- RUBRIQUES -->
 
@@ -510,6 +560,33 @@ function imageURL(image) {
     image.replace(/^\/+/, "");
 }
 
+// Les cartes restent visibles si les animations ou cet observateur sont indisponibles.
+const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+const articleObserver = "IntersectionObserver" in window
+  ? new IntersectionObserver(entries => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        if (!motionPreference.matches) {
+          entry.target.classList.add("is-revealing");
+        }
+        articleObserver.unobserve(entry.target);
+      }
+    }, { threshold: 0.08 })
+  : null;
+
+function observeArticle(card) {
+  if (articleObserver && !motionPreference.matches) {
+    articleObserver.observe(card);
+  }
+}
+
+document.querySelectorAll(".article").forEach(observeArticle);
+document.addEventListener("animationend", event => {
+  if (event.animationName === "article-appear") {
+    event.target.classList.remove("is-revealing");
+  }
+});
+
 async function loadLatestArticles() {
   const status =
     document.getElementById("status");
@@ -531,7 +608,7 @@ async function loadLatestArticles() {
       file.name.endsWith(".md")
     );
 
-    const articles = await Promise.all(
+    const results = await Promise.allSettled(
       markdownFiles.map(async file => {
         const articleResponse =
           await fetch(file.download_url);
@@ -553,6 +630,18 @@ async function loadLatestArticles() {
         };
       })
     );
+
+    const articles = results
+      .filter(result => result.status === "fulfilled")
+      .map(result => result.value);
+
+    if (markdownFiles.length > 0 && articles.length === 0) {
+      throw new Error("Articles inaccessibles");
+    }
+
+    if (results.some(result => result.status === "rejected")) {
+      console.warn("Certaines publications n'ont pas pu être chargées.");
+    }
 
     /* PUBLICATIONS DES 7 DERNIERS JOURS */
 
@@ -583,6 +672,8 @@ async function loadLatestArticles() {
       return;
     }
 
+    const fragment = document.createDocumentFragment();
+
     latest.forEach(article => {
       const card =
         document.createElement("article");
@@ -593,7 +684,8 @@ async function loadLatestArticles() {
 
       const imageHTML = image
         ? `<img src="${escapeHTML(image)}"
-                alt="${escapeHTML(article.title)}">`
+                alt="${escapeHTML(article.title)}"
+                loading="lazy" decoding="async">`
         : "⚽";
 
       const link =
@@ -635,14 +727,19 @@ async function loadLatestArticles() {
         </div>
       `;
 
-      container.appendChild(card);
+      fragment.appendChild(card);
     });
+
+    container.replaceChildren(fragment);
+    container.querySelectorAll(".article").forEach(observeArticle);
 
   } catch (error) {
     console.error(error);
 
     status.textContent =
       "Impossible de charger les derniers articles pour le moment.";
+  } finally {
+    container.setAttribute("aria-busy", "false");
   }
 }
 
